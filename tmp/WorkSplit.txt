@@ -1,0 +1,13 @@
+Work, scale 1-10, rough estimates from eyeballing code.
+Brian 	ast.*	 			9
+Sam  	parser.*			8
+Both	translator.*			7 ~ actual compiler
+Brian	token.*				4
+Brian	tokens.*			4
+Sam	stringsequence.*		3
+Both	calc.* 				2 ~ interpreter (top level)
+Sam 	istreamsequence.*	 	2
+Sam	sequence.* 			2
+
+
+
