@@ -17,14 +17,12 @@ class Parser
 	   end
       end
 
+public
       virtual :parse #dependent on ast      
-      def CreateRecursiveDescentParser
-      	parser = RecrusiveDescentParser.new
-            return parser
-      end
 end
 
 class RecursiveDescentParser < Parser
+      @tokens #tokens
       def peek(delta = 0)
       	  return @tokens.peek(delta)
       end
@@ -141,12 +139,12 @@ class RecursiveDescentParser < Parser
 
       def parse(tokens)
       	  @tokens = tokens
-	  #@e
-	  if statements(@e)
+	  e = ASTNode.new
+	  if statements(e)
 	     return e
 	  else 
 	       syntax
 	  end
       end
-      private :peek, :shift, :at, :syntax, :match, :endy, :eol, :lparen, :rparen, :op, :number, :expression, :statement, :statements #:symbol, :literal
+      private :peek, :shift, :at, :match, :endy, :eol, :lparen, :rparen, :op, :number, :expression, :statement, :statements #:symbol, :literal
 end
