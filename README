@@ -4,3 +4,7 @@ Start date: Oct. 23, 2013
 
 Compiler for WM++ like language written in Ruby that compiles to Rubinius.
 Based on work by Dr. Warren Macevoy in C++.
+
+
+TO-DO
+-Determine how we want to abstarct and handle "out" (streams)

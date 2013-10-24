@@ -1,6 +1,6 @@
 # Initial Implementation based on C++ code from Dr. MacEvoy
 
-require 'token'
+require_relative "token"
 
 class Tokens
 	def initialize(sequence_)
@@ -55,21 +55,29 @@ class Tokens
 				t.type = T_ERROR
 			end
 		end
-		ahead.insert(0, t) 
+		@ahead.insert(0, t) 
 	end
 
 	def peek(delta) 
-		while ahead.size <= delta do
-			next
+		while @ahead.size <= delta do
+			self.next
 		end
+
+		counter = 0
+		until delta == 0 do
+			counter += 1
+			delta -= 1
+		end
+
+		return @ahead[counter]
 	end
 
 	def shift(delta)
-		while ahead.size < delta do
-			next
+		while @ahead.size < delta do
+			self.next
 		end
 		while delta > 0 do
-			ahead.delete_at(0)
+			@ahead.delete_at(0)
 			delta -= 1
 		end
 	end

@@ -10,7 +10,7 @@
 	T_ERROR = "?"
 
 class Token
-	attr_reader :type
+	attr_accessor :type
 	attr_reader :value
 	attr_reader :at
 
