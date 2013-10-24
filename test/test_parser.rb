@@ -7,8 +7,13 @@ class TestParser < Test::Unit::TestCase
 		assert(true)
 	end	
 
-	def test_syntax
+	def test_parse
 		g = RecursiveDescentParser.new
+=begin
+			sequence from file
+			t = tokens.new(sequence)
+			g.parse(t)
+=end
 		assert(true)
 	end
 end 
