@@ -3,8 +3,8 @@
 require_relative "token"
 
 class Tokens
-	def initialize(sequence_)
-		@sequence = sequence_;
+	def initialize(sequence)
+		@sequence = sequence;
 		@ahead = Array.new
 	end
 

@@ -14,14 +14,14 @@ class Token
 	attr_reader :value
 	attr_reader :at
 
-	def initialize(type_, value_, at_)
-		@type = type_;
-		@value = value_;
-		@at = at_;
+	def initialize(type, value, at)
+		@type = type
+		@value = value
+		@at = at
 	end
 
 	def ==(other)
-		return self.type == other.type && self.value == other.value && self.at == other.at;
+		return self.type == other.type && self.value == other.value && self.at == other.at
 	end
 
 	def print(out)
