@@ -17,5 +17,6 @@ class ASTSymbol < ASTNode
 
 	def translate(out)
 		#define translation to rubinius
+		raise("No implementation of ASTSymbol translate")
 	end
 end

@@ -7,6 +7,7 @@ class ASTNode
 
 	def translate(out)
 		# Implement translate to rubinius
+		raise("No implementation of ASTNode translate")
 	end
 
 	def eval
