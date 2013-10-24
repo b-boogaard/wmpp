@@ -7,18 +7,20 @@ require_relative "ast.rb"
 
 class Parser
       class Syntax
-      	    def initialize(error, at)
-	    	@error = error
-		@at = at
-	    end 
+        def initialize(error, at)
+          @error = error
+	    @at = at
+	   end    
 	    
-	    def print(out)
-	    	out.puts("error at #{@at}: #{@error}")
-	    end
+	   def print(out)
+	     out.puts("error at #{@at}: #{@error}")
+	   end
       end
+
       virtual :parse(tokens) #dependent on ast      
       def CreateRecursiveDescentParser
-      	  parser = RecrusiveDescentParse.new
+      	parser = RecrusiveDescentParser.new
+            return parser
       end
 end
 
@@ -36,10 +38,10 @@ class RecursiveDescentParser < Parser
       end
 
       def syntax
-      	  at_ = at
-	  peek_ = peek
-      	  message = "syntax error at offset #{at_} near #{peek_}"
-	  throw ::Parser::Syntax(message, at)
+            at_ = at
+	      peek_ = peek
+      	message = "syntax error at offset #{at_} near #{peek_}"
+	  throw Parser::Syntax(message, at)
       end
 
       def parse(tokens)
