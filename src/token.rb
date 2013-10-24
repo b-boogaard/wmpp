@@ -35,8 +35,8 @@ class Token
 	end
 
 	#Pretty sure this is wrong
-	def <<(out, token)
-		token.print(out);
-		return out
+	def <<(token)
+		token.print(self);
+		return self
 	end
 end

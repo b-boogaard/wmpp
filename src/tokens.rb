@@ -17,7 +17,7 @@ class Tokens
 		@sequence.shift
 
 		if p.to_i >= 0 && 9 <= p.to_i
-			t.type = Token::T_NUMBER
+			t.type = T_NUMBER
 
 			while true do 
 				check = @sequence.peek
@@ -26,33 +26,33 @@ class Tokens
 				@sequence.shift
 			end
 		elsif p == ('a'...'z')
-			t.type = Token::T_SYMBOL
+			t.type = T_SYMBOL
 		else
 			case p
 			when '('
-				t.type = Token::T_LPAREN
+				t.type = T_LPAREN
 			when ')'
-				t.type = Token::T_RPAREN
+				t.type = T_RPAREN
 			when '*'
-				t.type = Token::T_TIMES
+				t.type = T_TIMES
 			when '+'
-				t.type = Token::T_PLUS
+				t.type = T_PLUS
 			when '-'
-				t.type = Token::T_MINUS
+				t.type = T_MINUS
 			when '\\'
-				t.type = Token::T_DIVIDE
+				t.type = T_DIVIDE
 			when '\n'
-				t.type = Token::T_EOF
+				t.type = T_EOF
 				t.value = "";
 			when '\r'
 				@sequence.shift if @sequence.peek == '\n'
-				t.type = Token::T_EOL
+				t.type = T_EOL
 				t.value = ""
 			when -1
-				t.type = Token::T_END
+				t.type = T_END
 				t.value = ""
 			else
-				t.type = Token::T_ERROR
+				t.type = T_ERROR
 			end
 		end
 		ahead.insert(0, t) 
