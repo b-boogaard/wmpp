@@ -1,10 +1,10 @@
 require_relative "sequence.rb"
 
 class StringSequence < Sequence
-private:
-	@s
-	@offset
-public:
+private
+public
+	attr_accessor :s
+	attr_accessor :offset
 	def initialize(s)
 		@s = s
 		@offset = 0
@@ -22,7 +22,7 @@ public:
 		@offset += delta
 	end
 end	
-
+=begin
 class IStreamSequence < Sequence
 private:
 	@is #istream
@@ -58,3 +58,4 @@ public:
 		end
 	end 
 end
+=end
