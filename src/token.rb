@@ -1,4 +1,15 @@
 class Token
+	@@T_END = -1
+	@@T_EOL = "\n"
+	@@T_LPAREN = "("
+	@@T_RPAREN = ")"
+	@@T_TIMES = "*"
+	@@T_PLUS = "+"
+	@@T_DIVIDE = "\\"
+	@@T_MINUS = "-"
+	@@T_NUMBER = "\#"
+	@@T_ERROR = "?"
+
 	def initialize(type_, value_, at_)
 		@type = type_;
 		@value = value_;
@@ -18,7 +29,7 @@ class Token
 			out.write(@type);
 		end
 	end
-	
+
 	#Pretty sure this is wrong
 	def <<(out, token)
 		token.print(out);
