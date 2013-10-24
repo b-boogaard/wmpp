@@ -1,4 +1,4 @@
-#require_relative "../src/parser.rb"
+require_relative "../src/parser.rb"
 
 require "test/unit"
 
