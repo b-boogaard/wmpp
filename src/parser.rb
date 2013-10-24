@@ -17,7 +17,7 @@ class Parser
 	   end
       end
 
-      virtual :parse(tokens) #dependent on ast      
+      virtual :parse #dependent on ast      
       def CreateRecursiveDescentParser
       	parser = RecrusiveDescentParser.new
             return parser
@@ -44,6 +44,54 @@ class RecursiveDescentParser < Parser
 	  throw Parser::Syntax(message, at)
       end
 
+      def match
+
+      end
+
+      def endy
+
+      end
+
+      def eol
+
+      end
+
+      def lparen
+
+      end
+
+      def rparen
+
+      end
+
+      def op
+
+      end
+
+      def number
+
+      end
+
+      def symbol
+
+      end
+
+      def literal
+
+      end
+
+      def expression
+
+      end
+
+      def statement
+
+      end
+
+      def statements
+
+      end
+
       def parse(tokens)
       	  @tokens = tokens
 	  #@e
@@ -53,5 +101,5 @@ class RecursiveDescentParser < Parser
 	       syntax
 	  end
       end
-      private :peek, :shift, :at, :syntax, :match, :end, :eol, :lparen, :rparen, :op, :number, :symbol, :literal, :expression, :statement, :statements
+      private :peek, :shift, :at, :syntax, :match, :endy, :eol, :lparen, :rparen, :op, :number, :symbol, :literal, :expression, :statement, :statements
 end
