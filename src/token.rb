@@ -1,14 +1,18 @@
+	T_END = -1
+	T_EOL = "\n"
+	T_LPAREN = "("
+	T_RPAREN = ")"
+	T_TIMES = "*"
+	T_PLUS = "+"
+	T_DIVIDE = "\\"
+	T_MINUS = "-"
+	T_NUMBER = "\#"
+	T_ERROR = "?"
+
 class Token
-	@@T_END = -1
-	@@T_EOL = "\n"
-	@@T_LPAREN = "("
-	@@T_RPAREN = ")"
-	@@T_TIMES = "*"
-	@@T_PLUS = "+"
-	@@T_DIVIDE = "\\"
-	@@T_MINUS = "-"
-	@@T_NUMBER = "\#"
-	@@T_ERROR = "?"
+	attr_reader :type
+	attr_reader :value
+	attr_reader :at
 
 	def initialize(type_, value_, at_)
 		@type = type_;
