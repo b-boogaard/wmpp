@@ -26,15 +26,16 @@ class Token
 
 	def print(out)
 		if (@type == T_END) 
-			out.write("eof");
+			out.puts("eof");
 		elsif (@type == T_NUMBER)
-			out.write("\##{@value}") 
+			out.puts("\##{@value}") 
 		else 
-			out.write(@type);
+			out.puts(@type);
 		end
 	end
 
 	#Pretty sure this is wrong
+	# Not sure we even need <<
 	def <<(token)
 		token.print(self);
 		return self

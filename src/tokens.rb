@@ -55,7 +55,7 @@ class Tokens
 				t.type = T_ERROR
 			end
 		end
-		@ahead.insert(0, t) 
+		@ahead.push(t) 
 	end
 
 	def peek(delta) 
@@ -68,7 +68,7 @@ class Tokens
 			counter += 1
 			delta -= 1
 		end
-
+		
 		return @ahead[counter]
 	end
 

@@ -10,7 +10,8 @@ class TestTokens < Test::Unit::TestCase
 		# Check initial peek
 		assert_equal("h", tokens.peek(0).value)
 		
-		#assert_equal("e", tokens.peek(1).value) FAILS
+		assert_equal("e", tokens.peek(1).value)
+		assert_equal("o", tokens.peek(4).value)
 
 		# Shift tokens
 		tokens.shift(1)
