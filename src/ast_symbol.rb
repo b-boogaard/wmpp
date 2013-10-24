@@ -1,6 +1,6 @@
 require_relative "ast_node"
 
-class ASTSymbol
+class ASTSymbol < ASTNode
 
 	def initialize(name)
 		@name = name
