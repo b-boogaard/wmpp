@@ -1,6 +1,6 @@
 require_relative "ast_node.rb"
 
-class ASTNumber
+class ASTNumber < ASTNode
 	def initialize(value)
 		@value = value
 	end
