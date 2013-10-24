@@ -37,8 +37,10 @@ public:
 
 	def peek(delta = 0)
 		while @ahead.size <= delta do
-			ahead << 			
+			ahead << @is.get #broken
+			@offset += 1			
 		end
+		return @ahead[delta] #broken
 	end 
 
 	def at
@@ -46,6 +48,13 @@ public:
 	end 
 
 	def shift(delta = 1)
-
+		while @ahead.size < delta do
+			@ahead << @is.get #broken
+			@offset += 1
+		end
+		while delta > 0 do
+			@ahead.pop #might be broken
+			delta -= 1
+		end
 	end 
 end
