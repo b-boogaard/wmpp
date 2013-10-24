@@ -1,6 +1,6 @@
 require_relative "ast_node.rb"
 
-class ASTProduct < ASTNode
+class ASTDivide < ASTNode
 	@lhs
   @rhs
 
@@ -9,20 +9,20 @@ class ASTProduct < ASTNode
           @lhs = lhs
           @rhs = rhs
         else
-          raise("Type mismatch excpected ASTNode in ASTProduct initialization")
+          raise("Type mismatch excpected ASTNode in ASTDivide initialization")
         end
   end
 
   def eval
-  	return @lhs.eval * @rhs.eval
+  	return @lhs.eval / @rhs.eval
   end
 
   def print(out)
-  	out.puts "(#{@lhs} * #{@rhs})"
+  	out.puts "(#{@lhs} / #{@rhs})"
   end
 
   def translate(out)
   	#translate
-  	raise("No implementation of ASTProduct translate")
+  	raise("No implementation of ASTDivide translate")
   end
 end
