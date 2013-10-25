@@ -39,16 +39,16 @@ class RecursiveDescentParser < Parser
             at_ = at
 	      peek_ = peek
       	message = "syntax error at offset #{at_} near #{peek_}"
-	  throw Parser::Syntax(message, at)
+	  #throw Parser.Syntax(message, at)
       end
 
       def match(type)
             if peek.type == type
-                  ans = Token.new(peek)
+                  ans = Token.new(type,peek,at)
                   shift
                   return ans # return true #broken maybe; doesn't follow shared pointer idea
             else
-                  return Token.new  #probably broken
+                  return false #Token.new  #probably broken
             end
       end
 
@@ -100,7 +100,7 @@ class RecursiveDescentParser < Parser
       def expression(e)
             if peek.type == T_LPAREN
                   lhs = ASTNode.new
-                  optype
+                  optype = T_PLUS
                   rhs = ASTNode.new
                   if lparen and expression(lhs) and op(optype) and expression(rhs) and rparen
                         if optype == T_PLUS
@@ -138,7 +138,7 @@ class RecursiveDescentParser < Parser
       end
 
       def parse(tokens)
-      	  @tokens = tokens
+        @tokens = tokens
 	  e = ASTNode.new
 	  if statements(e)
 	     return e

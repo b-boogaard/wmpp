@@ -22,7 +22,7 @@ class Tokens
 			while true do 
 				check = @sequence.peek
 				break if (check.to_i < 0) || (check.to_i > 9)
-				t.value += @sequence.peek
+				t.value += @sequence.peek 
 				@sequence.shift
 			end
 		elsif p == ('a'...'z')
