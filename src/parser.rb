@@ -103,7 +103,7 @@ class RecursiveDescentParser < Parser
       def number_test
             t = match(T_NUMBER)
             if t
-                  return ASTNumber.new(t.value.to_i)
+                  return ASTNumber.new(t.value)
             else
                   return false
             end
@@ -196,6 +196,7 @@ class RecursiveDescentParser < Parser
                   return ASTStatements.new
             end
             s = statement_test
+            if not s; syntax end
             e = statements_test
             e.statements << s
             return e
