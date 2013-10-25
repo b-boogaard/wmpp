@@ -4,10 +4,18 @@ require "test/unit"
 
 class TestASTMinus < Test::Unit::TestCase
 	def test_eval
-		one = ASTNumber.new(10)
-		two = ASTNumber.new(2)
+		num = rand(30)
+		checks = Array.new
 
-		product = ASTMinus.new(one, two)
-		assert_equal(8, product.eval)
+		num.times do
+			first = rand(1000)
+			second = rand(1000)
+
+			lhs = ASTNumber.new(first)
+			rhs = ASTNumber.new(second)
+
+			minus = ASTMinus.new(lhs, rhs)
+			assert_equal((first - second), minus.eval, "#{(first-second)} != minus.eval: #{minus.eval}")
+		end
 	end
 end

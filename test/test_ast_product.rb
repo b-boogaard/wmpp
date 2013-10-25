@@ -4,10 +4,18 @@ require "test/unit"
 
 class TestASTProduct < Test::Unit::TestCase
 	def test_eval
-		one = ASTNumber.new(10)
-		two = ASTNumber.new(2)
+		num = rand(30)
+		checks = Array.new
 
-		product = ASTProduct.new(one, two)
-		assert_equal(20, product.eval)
+		num.times do
+			first = rand(1000)
+			second = rand(1000)
+
+			lhs = ASTNumber.new(first)
+			rhs = ASTNumber.new(second)
+
+			product = ASTProduct.new(lhs, rhs)
+			assert_equal((first * second), product.eval, "#{(first*second)} != product.eval: #{product.eval}")
+		end
 	end
 end

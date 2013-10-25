@@ -4,10 +4,19 @@ require "test/unit"
 
 class TestASTDivide < Test::Unit::TestCase
 	def test_eval
-		one = ASTNumber.new(10)
-		two = ASTNumber.new(2)
+		num = rand(30)
+		checks = Array.new
 
-		product = ASTDivide.new(one, two)
-		assert_equal(5, product.eval)
+		num.times do
+			first = rand(1000)
+			second = rand(1000)
+
+			second = 1 if second <= 0
+			lhs = ASTNumber.new(first)
+			rhs = ASTNumber.new(second)
+
+			divide = ASTDivide.new(lhs, rhs)
+			assert_equal((first / second), divide.eval, "#{(first/second)} != divide.eval: #{divide.eval}")
+		end
 	end
 end
