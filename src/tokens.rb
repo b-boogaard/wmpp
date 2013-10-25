@@ -16,17 +16,16 @@ class Tokens
 
 		@sequence.shift
 
-		if (p.to_i != -1 and p >= "0" and "9" >= p)
+		if (p.to_i != -1 and ((p >= "0" and "9" >= p) or (p=='.')))
 			t.type = T_NUMBER
-			have_dec = false
-			has_dot = false
+			have_dec = (p=='.')
 			while true do 
 				check = @sequence.peek(0)
-				break if (check.to_i == -1 or (check < "0") or (check > "9")) and (check != '.' and not have_dec)
-				if check == have_dec
+				break if (check.to_i == -1 or (check == '.' and have_dec) or ((check < "0") or (check > "9")))
+				if check == '.'
 					have_dec = true
 				end
-				t.value += @sequence.peek(0) 
+				t.value += @sequence.peek(0).to_s 
 				@sequence.shift
 			end
 		elsif p == ('a'...'z')
