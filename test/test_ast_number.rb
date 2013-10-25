@@ -20,15 +20,27 @@ class TestASTNumber < Test::Unit::TestCase
 		assert_equal(10.102, number.eval)
 	end
 
-	def test_neg_number
+	def test_neg_number_string
 		number = ASTNumber.new("-1")
 
 		assert_equal(-1, number.eval)
 	end
 
-	def test_neg_float
+	def test_neg_float_string
 		number = ASTNumber.new("-23.432")
 
 		assert_equal(-23.432, number.eval)
 	end
+
+	def test_neg_float
+		number = ASTNumber.new(-23.432)
+		assert_equal(-23.432, number.eval)
+	end
+
+	def test_float_decimal_only
+		number = ASTNumber.new(".034")
+
+		assert_equal(0.034, number.eval)
+	end
+
 end

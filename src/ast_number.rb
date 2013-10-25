@@ -6,7 +6,7 @@ class ASTNumber < ASTNode
 			@value = nil
 		elsif value.to_s =~ (/^[-]?[0-9]+([0-9]*)?$/)
 			@value = value.to_i
-		elsif value.to_s =~ (/^[-]?[0-9]+([0-9]*)?\.[0-9]+([0-9]*)?$/)
+		elsif value.to_s =~ (/^([-]?[0-9]+([0-9]*)?)?\.[0-9]+([0-9]*)?$/)
 			@value = value.to_f
 		else
 			raise SyntaxError, "Trying to initialize ASTNumber with non-integer or non-float value"
