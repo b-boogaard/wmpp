@@ -5,12 +5,12 @@ class ASTSum < ASTNode
   	@rhs
 
   def initialize(lhs, rhs)
-  	if ((lhs.is_a? ASTNode) and (rhs.is_a? ASTNode)) 
+  	#if ((lhs.is_a? ASTNode) and (rhs.is_a? ASTNode)) 
   		@lhs = lhs
   		@rhs = rhs
-  	else
-  		raise("Type mismatch excpected ASTNode in ASTSum initialization")
-  	end
+  	#else
+  #		raise("Type mismatch excpected ASTNode in ASTSum initialization: lhs: #{lhs} - rhs: #{rhs}")
+ # 	end
   end
 
   def eval

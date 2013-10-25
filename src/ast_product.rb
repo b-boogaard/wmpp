@@ -5,12 +5,12 @@ class ASTProduct < ASTNode
   @rhs
 
   def initialize(lhs, rhs)
-    if ((lhs.is_a? ASTNode) and (rhs.is_a? ASTNode)) 
+    #if ((lhs.is_a? ASTNode) and (rhs.is_a? ASTNode)) 
           @lhs = lhs
           @rhs = rhs
-        else
-          raise("Type mismatch excpected ASTNode in ASTProduct initialization")
-        end
+     #   else
+      #    raise("Type mismatch excpected ASTNode in ASTProduct initialization")
+       # end
   end
 
   def eval
