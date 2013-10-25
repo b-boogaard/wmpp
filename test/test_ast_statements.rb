@@ -19,7 +19,6 @@ class TestASTStatements < Test::Unit::TestCase
 		count = 0
 		ios = IO.new STDOUT.fileno 
 		s.statements.each do |statement|
-			puts "#{e[count].print(ios)} == #{statement.print(ios)}"
 			assert_equal(e[count].eval, statement.eval, "#{statement} != statement.eval")# if statement != nil
 			count += 1
 		end
