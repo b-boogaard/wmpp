@@ -6,7 +6,7 @@ class TestASTDivide < Test::Unit::TestCase
 	def test_eval
 		30.times do
 			first = rand(1000)
-			second = rand(1000)
+			second = 1 + rand(1000)
 
 			lhs = ASTNumber.new(first)
 			rhs = ASTNumber.new(second)
@@ -25,6 +25,28 @@ class TestASTDivide < Test::Unit::TestCase
 
 		divide = ASTDivide.new(lhs, rhs)
 		assert_equal(2, divide.eval, "0 != #{divide.eval}")
+	end
+
+	def test_eval_float
+		first = "9"
+		second = "2.0"
+
+		lhs = ASTNumber.new(first)
+		rhs = ASTNumber.new(second)
+
+		divide = ASTDivide.new(lhs,rhs)
+		assert_equal(4.5, divide.eval, "4.5 != #{divide.eval}")
+	end
+
+	def test_integer_division
+		first = 9
+		second = 2
+
+		lhs = ASTNumber.new(first)
+		rhs = ASTNumber.new(second)
+
+		divide = ASTDivide.new(lhs,rhs)
+		assert_equal(4, divide.eval, "4 !- #{divide.eval}")
 	end
 
 	def test_nil_lsh

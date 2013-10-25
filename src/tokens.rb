@@ -19,6 +19,7 @@ class Tokens
 		if (p.to_i != -1 and p >= "0" and "9" >= p)
 			t.type = T_NUMBER
 
+			has_dot = false
 			while true do 
 				check = @sequence.peek(0)
 				break if (check.to_i == -1 or (check < "0") or (check > "9"))

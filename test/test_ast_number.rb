@@ -7,4 +7,16 @@ class TestASTNumber < Test::Unit::TestCase
 
 		assert_equal(10, number.eval)
 	end
+
+	def test_string_to_integer
+		number = ASTNumber.new("10")
+
+		assert_equal(10, number.eval)
+	end
+
+	def test_string_to_float
+		number = ASTNumber.new("10.102")
+
+		assert_equal(10.102, number.eval)
+	end
 end
