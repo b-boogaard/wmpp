@@ -11,13 +11,6 @@ class ASTNumber < ASTNode
 		else
 			raise SyntaxError, "Trying to initialize ASTNumber with non-integer or non-float value"
 		end
-=begin
-		if (value != nil and (value.is_a? Integer or value.is_a? Float))
-			@value = value
-		else 
-			@value = nil
-		end
-=end
 	end
 
 	def eval

@@ -4,15 +4,25 @@ require "test/unit"
 
 class TestASTSum < Test::Unit::TestCase
 	def test_eval
-		30.times do
-			first = rand(1000)
-			second = rand(1000)
+		30.times do |x|
+			if x % 2 == 0
+				first = rand(1000)
+				second = rand(1000)
+			else
+				first = rand(1000)
+				second = rand(1000)
+				second = second.to_f
+			end
 
-			lhs = ASTNumber.new(first)
-			rhs = ASTNumber.new(second)
+			lhs = ASTNumber.new(first.to_s) # passed as Sting
+			rhs = ASTNumber.new(second)		# passed as either Integer or Float
 
 			sum = ASTSum.new(lhs, rhs)
-			assert_equal((first.to_i + second.to_i), sum.eval, "#{(first.to_i+second.to_i)} != sum.eval: #{sum.eval}")
+			if x % 2 == 0
+				assert_equal((first.to_i + second.to_i), sum.eval, "#{(first.to_i + second.to_i)} != sum.eval: #{sum.eval}")
+			else
+				assert_equal((first.to_f + second.to_f), sum.eval, "#{(first.to_f + second.to_f)} != sum.eval: #{sum.eval}")
+			end
 		end
 	end
 

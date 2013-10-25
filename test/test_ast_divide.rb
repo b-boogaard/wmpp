@@ -4,15 +4,27 @@ require "test/unit"
 
 class TestASTDivide < Test::Unit::TestCase
 	def test_eval
-		30.times do
-			first = rand(1000)
-			second = 1 + rand(1000)
+		30.times do |x|
+			if x % 2 == 0
+				first = rand(1000)
+				second = rand(1000)
+			else
+				first = rand(1000)
+				second = rand(1000)
+				second = second.to_f
+			end
 
-			lhs = ASTNumber.new(first)
-			rhs = ASTNumber.new(second)
+			second = 1 if second <= 0
+
+			lhs = ASTNumber.new(first.to_s) # passed as Sting
+			rhs = ASTNumber.new(second)		# passed as either Integer or Float
 
 			divide = ASTDivide.new(lhs, rhs)
-			assert_equal((first.to_i / second.to_i), divide.eval, "#{(first.to_i/second.to_i)} != divide.eval: #{divide.eval}")
+			if x % 2 == 0
+				assert_equal((first.to_i / second.to_i), divide.eval, "#{(first.to_i/second.to_i)} != divide.eval: #{divide.eval}")
+			else
+				assert_equal((first.to_f / second.to_f), divide.eval, "#{(first.to_f/second.to_f)} != divide.eval: #{divide.eval}")
+			end
 		end
 	end
 

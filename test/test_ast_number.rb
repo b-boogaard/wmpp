@@ -26,6 +26,12 @@ class TestASTNumber < Test::Unit::TestCase
 		assert_equal(-1, number.eval)
 	end
 
+	def test_float_raw
+		number = ASTNumber.new(0.123)
+
+		assert_equal(0.123, number.eval)
+	end
+
 	def test_neg_float_string
 		number = ASTNumber.new("-23.432")
 
@@ -43,4 +49,9 @@ class TestASTNumber < Test::Unit::TestCase
 		assert_equal(0.034, number.eval)
 	end
 
+	def test_float_decimal_with_zero
+		number = ASTNumber.new("0.034")
+
+		assert_equal(0.034, number.eval)
+	end
 end

@@ -4,15 +4,25 @@ require "test/unit"
 
 class TestASTProduct < Test::Unit::TestCase
 	def test_eval
-		30.times do
-			first = rand(1000)
-			second = rand(1000)
+		30.times do |x|
+			if x % 2 == 0
+				first = rand(1000)
+				second = rand(1000)
+			else
+				first = rand(1000)
+				second = rand(1000)
+				second = second.to_f
+			end
+				lhs = ASTNumber.new(first.to_s) # passed as Sting
+				rhs = ASTNumber.new(second)		# passed as either Integer or Float
 
-			lhs = ASTNumber.new(first)
-			rhs = ASTNumber.new(second)
-
-			product = ASTProduct.new(lhs, rhs)
-			assert_equal((first.to_i * second.to_i), product.eval, "#{(first*second)} != product.eval: #{product.eval}")
+				product = ASTProduct.new(lhs, rhs)
+	
+			if x % 2 == 0
+				assert_equal((first.to_i * second.to_i), product.eval, "#{(first.to_i * second.to_i)} != product.eval: #{product.eval}")
+			else
+				assert_equal((first.to_f * second.to_f), product.eval, "#{(first.to_f * second.to_f)} != product.eval: #{product.eval}")
+			end
 		end
 	end
 

@@ -4,16 +4,37 @@ require "test/unit"
 
 class TestASTMinus < Test::Unit::TestCase
 	def test_eval
-		30.times do
-			first = rand(1000)
-			second = rand(1000)
+		30.times do |x|
+			if x % 2 == 0
+				first = rand(1000)
+				second = rand(1000)
+			else
+				first = rand(1000)
+				second = rand(1000)
+				second = second.to_f
+			end
 
-			lhs = ASTNumber.new(first)
-			rhs = ASTNumber.new(second)
+			lhs = ASTNumber.new(first.to_s) # passed as Sting
+			rhs = ASTNumber.new(second)		# passed as either Integer or Float
 
 			minus = ASTMinus.new(lhs, rhs)
-			assert_equal((first.to_i - second.to_i), minus.eval, "#{(first.to_i-second.to_i)} != minus.eval: #{minus.eval}")
+			if x % 2 == 0
+				assert_equal((first.to_i - second.to_i), minus.eval, "#{(first.to_i-second.to_i)} != minus.eval: #{minus.eval}")
+			else
+				assert_equal((first.to_f - second.to_f), minus.eval, "#{(first.to_f - second.to_f)} != minus.eval: #{minus.eval}")
+			end
 		end
+	end
+
+	def test_decimal
+		first = 10
+		second = 2.5
+
+		lhs = ASTNumber.new(first)
+		rhs = ASTNumber.new(second)
+
+		minus = ASTMinus.new(lhs, rhs)
+		assert_equal(7.5, minus.eval)
 	end
 
 	def test_eval_direct
@@ -37,7 +58,7 @@ class TestASTMinus < Test::Unit::TestCase
 		assert_raise(RuntimeError) {minus.eval}
 	end
 
-	def test_product_creation_with_nil
+	def test_minus_creation_with_nil
 		first = rand(1000)
 
 		lhs = ASTNumber.new(first)
