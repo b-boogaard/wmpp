@@ -1,4 +1,4 @@
-require_relative "ast_node.rb"
+ require_relative "ast_node.rb"
 
 class ASTProduct < ASTNode
 	@lhs
@@ -18,7 +18,8 @@ class ASTProduct < ASTNode
   end
 
   def print(out)
-  	out.puts "(#{@lhs} * #{@rhs})"
+  	out.write "(#{@lhs.print(out)} * #{@rhs.print(out)})"
+    #out.write "\n"
   end
 
   def translate(out)

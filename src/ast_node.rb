@@ -1,8 +1,8 @@
 class ASTNode
 
-	def print(out, msg)
+	def print(out)
 		# This may change depending on how we decide to abstract streams
-		out.puts msg
+		out.write "ASTNode"
 	end
 
 	def translate(out)

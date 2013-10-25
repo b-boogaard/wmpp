@@ -18,7 +18,8 @@ class ASTSum < ASTNode
   end
 
   def print(out)
-  	out.puts "(#{@lhs} + #{@rhs})"
+  	out.write "(#{@lhs.print(out)} + #{@rhs.print(out)})"
+    #out.write "\n"
   end
 
   def translate(out)

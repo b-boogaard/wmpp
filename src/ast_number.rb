@@ -10,7 +10,7 @@ class ASTNumber < ASTNode
 	end
 
 	def print(out)
-		out.puts(@value)
+		out.write "#{@value}"
 	end
 
 	def translate(out)

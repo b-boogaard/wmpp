@@ -9,20 +9,20 @@ class Tokens
 	end
 
 	def next
-		p = @sequence.peek;
+		p = @sequence.peek(0);
 		value = "";
 		value += p;
 		t = Token.new(p, value, @sequence.at)
 
 		@sequence.shift
 
-		if p.to_i >= 0 && 9 <= p.to_i
+		if (p >= "0" and "9" >= p)
 			t.type = T_NUMBER
 
 			while true do 
-				check = @sequence.peek
-				break if (check.to_i < 0) || (check.to_i > 9)
-				t.value += @sequence.peek 
+				check = @sequence.peek(0)
+				break if ((check < "0") or (check > "9"))
+				t.value += @sequence.peek(0) 
 				@sequence.shift
 			end
 		elsif p == ('a'...'z')
@@ -45,7 +45,7 @@ class Tokens
 				t.type = T_EOF
 				t.value = "";
 			when '\r'
-				@sequence.shift if @sequence.peek == '\n'
+				@sequence.shift if @sequence.peek(0) == '\n'
 				t.type = T_EOL
 				t.value = ""
 			when -1
