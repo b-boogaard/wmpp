@@ -39,7 +39,7 @@ class TestParser < Test::Unit::TestCase
 			#e = g.parse(t)
 			e = g.parse_test(t)
 			e.statements.reverse!
-			assert_equal(e.eval, eval(last).to_s, "#{e.eval} != #{last.to_s}, probably a parsing error")
+			assert_equal(e.eval, eval(last), "#{e.eval} != #{last.to_s}, probably a parsing error")
 		end
 =begin
 			sequence from file
