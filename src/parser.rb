@@ -128,7 +128,7 @@ class RecursiveDescentParser < Parser
                   e = ASTStatements.new
                  return true
             end
-            s
+            s = ASTNode.new
             if (statement(s) and statements(e))
                   e.statements << s#probably broken
                   return true

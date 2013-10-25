@@ -11,12 +11,12 @@ class Tokens
 	def next
 		p = @sequence.peek(0);
 		value = "";
-		value += p;
+		value += p.to_s;
 		t = Token.new(p, value, @sequence.at)
 
 		@sequence.shift
 
-		if (p >= "0" and "9" >= p)
+		if (p.to_i != -1 and p >= "0" and "9" >= p)
 			t.type = T_NUMBER
 
 			while true do 
