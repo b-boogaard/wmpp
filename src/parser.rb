@@ -44,7 +44,7 @@ class RecursiveDescentParser < Parser
 
       def match(type)
             if peek.type == type
-                  ans = Token.new(type,peek,at)
+                  ans = Token.new(type,peek.value,at)
                   shift
                   return ans # return true #broken maybe; doesn't follow shared pointer idea
             else
@@ -79,7 +79,28 @@ class RecursiveDescentParser < Parser
             end
       end
 
+      def op_test
+            t = peek
+            if t.type == T_PLUS or t.type = T_TIMES
+                  type = t.type
+                  shift
+                  return type
+            else
+                  syntax
+                  return false
+            end
+      end
+
       def number(node) #ASTNode
+            t = match(T_NUMBER)
+            if t
+                  node = ASTNumber.new(t.value)
+            else
+                  return false
+            end
+      end
+
+      def number_test
             t = match(T_NUMBER)
             if t
                   return ASTNumber.new(t.value)
@@ -118,8 +139,38 @@ class RecursiveDescentParser < Parser
       return false
       end
 
+      def expression_test
+           if peek.type == T_LPAREN
+                  shift
+                  lhs = expression_test
+                  optype = op_test
+                  rhs = expression_test
+                  shift
+                  if optype == T_PLUS
+                        return ASTSum.new(lhs,rhs)
+                  elsif optype == T_TIMES
+                        return ASTProduct.new(lhs,rhs)
+                  else 
+                        assert(false, "OP not + or *")
+                  end
+                  return true
+            else return number_test
+            end
+      return false
+      end
+
+
       def statement(e)
             return (expression(e) and (eol or endy))
+      end
+
+      def statement_test
+            e = expression_test
+            if (eol or endy)
+                  return e
+            else
+                  syntax
+            end
       end
 
       def statements(e)
@@ -127,13 +178,23 @@ class RecursiveDescentParser < Parser
                   e = ASTStatements.new
                  return true
             end
-            s = ASTNode.new
+            s = nil
             if (statement(s) and statements(e))
                   e.statements << s#probably broken
                   return true
             end
             syntax
             return false
+      end
+
+      def statements_test
+            if endy
+                  return ASTStatements.new
+            end
+            s = statement_test
+            e = statements_test
+            e.statements << s
+            return e
       end
 
       def parse(tokens)
@@ -144,6 +205,12 @@ class RecursiveDescentParser < Parser
 	  else 
 	       syntax
 	  end
+      end
+
+      def parse_test(tokens)
+        @tokens = tokens
+        e = statements_test
+        return e
       end
       private :peek, :shift, :at, :match, :endy, :eol, :lparen, :rparen, :op, :number, :expression, :statement, :statements #:symbol, :literal
 end

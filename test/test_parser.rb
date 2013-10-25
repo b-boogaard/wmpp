@@ -28,10 +28,18 @@ class TestParser < Test::Unit::TestCase
 		g = RecursiveDescentParser.new
 
 		100.times do |i|
-			s = genSequence(i%5)
+			s = ""
+			last = ""
+			rand(10).times do
+			 	temp = genSequence(i%5) + "\n"
+			 	s += temp
+			 	last = temp
+			end
 			t = Tokens.new(StringSequence.new(s))
-			e = g.parse(t)
-			assert_equal(e.eval, eval(s), "#{e.eval} != #{s}, probably a parsing error")
+			#e = g.parse(t)
+			e = g.parse_test(t)
+			e.statements.reverse!
+			assert_equal(e.eval, eval(last).to_s, "#{e.eval} != #{last.to_s}, probably a parsing error")
 		end
 =begin
 			sequence from file
