@@ -8,9 +8,7 @@ class TestASTStatements < Test::Unit::TestCase
 		sc = StatementCreator.new
 		e = Array.new
 
-		num = + rand(10)
-
-		num.times do |n|
+		10.times do |n|
 			temp = sc.create_statements(n)
 			s.statements.push(temp)
 			e.push(temp)
@@ -19,7 +17,9 @@ class TestASTStatements < Test::Unit::TestCase
 			#puts ""
 		end
 		count = 0
+		ios = IO.new STDOUT.fileno 
 		s.statements.each do |statement|
+			puts "#{e[count].print(ios)} == #{statement.print(ios)}"
 			assert_equal(e[count].eval, statement.eval, "#{statement} != statement.eval")# if statement != nil
 			count += 1
 		end

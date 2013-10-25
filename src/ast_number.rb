@@ -2,11 +2,16 @@ require_relative "ast_node.rb"
 
 class ASTNumber < ASTNode
 	def initialize(value)
-		@value = value
+		if (value != nil and value.is_a? Integer)
+			@value = value
+		else 
+			@value = nil
+		end
 	end
 
 	def eval
-		return @value
+		return nil if (@value.nil?)
+		return @value.to_i
 	end
 
 	def print(out)

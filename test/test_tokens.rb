@@ -26,16 +26,16 @@ class TestTokens < Test::Unit::TestCase
 	end
 
 	def test_actual_simply
-			sequence = MockSequence.new(["(", "3", "+", "4", ")"])
-			tokens = Tokens.new(sequence)	
+		sequence = MockSequence.new(["(", "3", "+", "4", ")"])
+		tokens = Tokens.new(sequence)	
 
-			assert_equal("(", tokens.peek(0).value)
-			assert_equal("3", tokens.peek(1).value)
+		assert_equal("(", tokens.peek(0).value)
+		assert_equal("3", tokens.peek(1).value)
 
-			tokens.shift(1)
+		tokens.shift(1)
 
-			assert_equal("3", tokens.peek(0).value)
-			assert_equal("+", tokens.peek(1).value)
+		assert_equal("3", tokens.peek(0).value)
+		assert_equal("+", tokens.peek(1).value)
 	end
 
 	def test_just_number
@@ -44,9 +44,15 @@ class TestTokens < Test::Unit::TestCase
 		assert_equal("123", tokens.peek(0).value)
 	end
 
+	def test_single_number
+		sequence = MockSequence.new(["4"])
+		tokens = Tokens.new(sequence)
+		assert_equal("4", tokens.peek(0).value)
+	end
+
 	def test_empty_sequence
 		sequence = MockSequence.new([])
 		tokens = Tokens.new(sequence)
-		assert_equal("", tokens.peek(0).value)
+		assert_equal("", tokens.peek(0).value) {}
 	end
 end

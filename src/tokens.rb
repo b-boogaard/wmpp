@@ -29,22 +29,22 @@ class Tokens
 			t.type = T_SYMBOL
 		else
 			case p
-			when '('
+			when "("
 				t.type = T_LPAREN
-			when ')'
+			when ")"
 				t.type = T_RPAREN
-			when '*'
+			when "*"
 				t.type = T_TIMES
-			when '+'
+			when "+"
 				t.type = T_PLUS
-			when '-'
+			when "-"
 				t.type = T_MINUS
-			when '\\'
+			when "/"
 				t.type = T_DIVIDE
-			when '\n'
-				t.type = T_EOF
+			when "\n"
+				t.type = T_EOL
 				t.value = "";
-			when '\r'
+			when "\r"
 				@sequence.shift if @sequence.peek(0) == '\n'
 				t.type = T_EOL
 				t.value = ""
