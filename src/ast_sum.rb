@@ -1,15 +1,12 @@
 require_relative "ast_node.rb"
 
 class ASTSum < ASTNode
-	@lhs
-  	@rhs
-
   def initialize(lhs, rhs)
   	if ((lhs.is_a? ASTNode) and (rhs.is_a? ASTNode)) 
       @lhs = lhs
       @rhs = rhs
     else
-      raise SyntaxError, "Type mismatch excpected ASTNode in ASTProduct initialization"
+      raise SyntaxError, "Type mismatch excpected ASTNode in ASTSum initialization"
     end
   end
 
@@ -39,6 +36,6 @@ class ASTSum < ASTNode
 
   def translate(out)
   	#translate
-  	raise NotImplementedError, "No implementation of ASTProduct translate"
+  	raise NotImplementedError, "No implementation of ASTSum translate"
   end
 end

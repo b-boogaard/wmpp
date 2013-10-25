@@ -4,10 +4,7 @@ require "test/unit"
 
 class TestASTProduct < Test::Unit::TestCase
 	def test_eval
-		num = rand(30)
-		checks = Array.new
-
-		num.times do
+		30.times do
 			first = rand(1000)
 			second = rand(1000)
 

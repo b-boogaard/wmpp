@@ -4,19 +4,81 @@ require "test/unit"
 
 class TestASTDivide < Test::Unit::TestCase
 	def test_eval
-		num = rand(30)
-		checks = Array.new
-
-		num.times do
+		30.times do
 			first = rand(1000)
 			second = rand(1000)
 
-			second = 1 if second <= 0
 			lhs = ASTNumber.new(first)
 			rhs = ASTNumber.new(second)
 
 			divide = ASTDivide.new(lhs, rhs)
-			assert_equal((first / second), divide.eval, "#{(first/second)} != divide.eval: #{divide.eval}")
+			assert_equal((first.to_i / second.to_i), divide.eval, "#{(first.to_i/second.to_i)} != divide.eval: #{divide.eval}")
 		end
+	end
+
+	def test_eval_direct
+		first = 20
+		second = 10
+
+		lhs = ASTNumber.new(first)
+		rhs = ASTNumber.new(second)
+
+		divide = ASTDivide.new(lhs, rhs)
+		assert_equal(2, divide.eval, "0 != #{divide.eval}")
+	end
+
+	def test_nil_lsh
+		first = rand(1000)
+
+		lhs = ASTNumber.new(nil)
+		rhs = ASTNumber.new(first)
+
+		divide = ASTDivide.new(lhs, rhs)
+		assert_raise(RuntimeError) {divide.eval}
+	end
+
+	def test_product_creation_with_nil
+		first = rand(1000)
+
+		lhs = ASTNumber.new(first)
+
+		assert_raise(SyntaxError) {divide = ASTDivide.new(lhs, nil)}
+	end
+
+	def test_basic_print
+		first = rand(1000)
+		second = rand(1000)
+
+		lhs = ASTNumber.new(first)
+		rhs = ASTNumber.new(second)
+
+		divide = ASTDivide.new(lhs, rhs)
+		ios = IO.new STDOUT.fileno
+		assert(divide.print(ios))
+	end
+
+	def test_print_with_astnumber_has_nil
+		ios = IO.new STDOUT.fileno
+		first = rand(1000)
+
+		lhs = ASTNumber.new(nil)
+		rhs = ASTNumber.new(first)
+
+		divide = ASTDivide.new(lhs, rhs)
+
+		assert(divide.print(ios))
+		ios.close
+	end
+
+	def test_divide_by_zero
+		first = 10
+		second = 0
+
+		lhs = ASTNumber.new(first)
+		rhs = ASTNumber.new(second)
+
+		divide = ASTDivide.new(lhs,rhs)
+
+		assert_raise(SyntaxError) {divide.eval} 
 	end
 end
