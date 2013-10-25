@@ -6,8 +6,14 @@ require "test/unit"
 def genSequence(i)
 	if i <= 0 or rand(11) < 2
 		if rand(4) == 0
+			if rand(3) == 0
+				return (rand(1000).to_s + '.' + rand(1000).to_s)
+			end
 			return rand(1000).to_s
 		else
+			if rand(3) == 0
+				return (rand(10).to_s + '.' + rand(10).to_s)
+			end
 			return rand(10).to_s
 		end
 	else
@@ -44,7 +50,7 @@ class TestParser < Test::Unit::TestCase
 			#e = g.parse(t)
 			e = g.parse_test(t)
 			e.statements.reverse!
-		
+
 			assert_equal(e.eval, eval(last), "#{e.eval} != #{last.to_s}, probably a parsing error")
 		end
 =begin
