@@ -11,10 +11,15 @@ def genSequence(i)
 			return rand(10).to_s
 		end
 	else
-		if rand(2) == 0
+		r = rand(4)
+		if r == 0
 			return "(#{genSequence(i-1)}+#{genSequence(i-1)})"
-		else
+		elsif r == 1
 			return "(#{genSequence(i-1)}*#{genSequence(i-1)})"
+	    elsif r == 2
+	        return "(#{genSequence(i-1)}-#{genSequence(i-1)})"
+	    else
+		    return "(#{genSequence(i-1)}/1)" #DON'T DIVIDE BY ZERO
 		end
 	end
 end
@@ -39,6 +44,7 @@ class TestParser < Test::Unit::TestCase
 			#e = g.parse(t)
 			e = g.parse_test(t)
 			e.statements.reverse!
+		
 			assert_equal(e.eval, eval(last), "#{e.eval} != #{last.to_s}, probably a parsing error")
 		end
 =begin

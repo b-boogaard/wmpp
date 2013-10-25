@@ -12,7 +12,7 @@ class ASTDivide < ASTNode
 
   def eval
     if ((@lhs.eval != nil) and (@rhs.eval != nil))
-      raise SyntaxError, "Tried to divide by 0" if @rhs.eval == 0
+    raise SyntaxError, "Tried to divide by 0" if @rhs.eval == 0
       return @lhs.eval / @rhs.eval
     else
       raise RuntimeError, "Trying to perfrom / with a nil object"
