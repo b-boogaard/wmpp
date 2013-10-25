@@ -21,7 +21,7 @@ class Tokens
 
 			while true do 
 				check = @sequence.peek(0)
-				break if ((check < "0") or (check > "9"))
+				break if (check.to_i == -1 or (check < "0") or (check > "9"))
 				t.value += @sequence.peek(0) 
 				@sequence.shift
 			end

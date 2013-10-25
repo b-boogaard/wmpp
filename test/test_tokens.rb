@@ -23,5 +23,20 @@ class TestTokens < Test::Unit::TestCase
 
 		assert_equal("/", tokens.peek(0).value)
 		assert_equal("890", tokens.peek(2).value)
+
+		sequence = MockSequence.new(["(", "3", "+", "4", ")"])
+		tokens = Tokens.new(sequence)
+
+		assert_equal("(", tokens.peek(0).value)
+		assert_equal("3", tokens.peek(1).value)
+
+		tokens.shift(1)
+
+		assert_equal("3", tokens.peek(0).value)
+		assert_equal("+", tokens.peek(1).value)
+
+		sequence = MockSequence.new(["1", "2", "3"])
+		tokens = Tokens.new(sequence)
+		assert_equal("123", tokens.peek(0).value)
 	end
 end

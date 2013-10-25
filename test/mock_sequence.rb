@@ -8,7 +8,11 @@ class MockSequence
 	end
 
 	def peek(n)
-		return @sequence[@index + n] if @index + n < (@sequence.length - 1)
+		if @index + n < (@sequence.length)
+		 	return @sequence[@index + n]
+		else
+			return -1
+		end
 	end
 
 	def shift

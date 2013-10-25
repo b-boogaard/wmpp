@@ -9,7 +9,7 @@ class ASTStatements < ASTNode
 	end
 
 	def eval
-		value
+		value = nil
 
 		@statements.each do |statement|
 			value = statement.eval
