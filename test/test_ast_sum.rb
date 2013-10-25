@@ -4,10 +4,18 @@ require "test/unit"
 
 class TestASTSum < Test::Unit::TestCase
 	def test_eval
-		one = ASTNumber.new(10)
-		two = ASTNumber.new(2)
+		num = rand(30)
+		checks = Array.new
 
-		sum = ASTSum.new(one, two)
-		assert_equal(12, sum.eval)
+		num.times do
+			first = rand(1000)
+			second = rand(1000)
+
+			lhs = ASTNumber.new(first)
+			rhs = ASTNumber.new(second)
+
+			sum = ASTSum.new(lhs, rhs)
+			assert_equal((first + second), sum.eval, "#{(first+second)} != sum.eval: #{sum.eval}")
+		end
 	end
 end
