@@ -21,7 +21,7 @@ class Tokens
 			have_dec = (p=='.')
 			while true do 
 				check = @sequence.peek(0)
-				break if (check.to_i == -1 or (check == '.' and have_dec) or ((check < "0") or (check > "9")))
+				break if (check.to_i == -1 or (check == '.' and have_dec) or (check!= '.' and ((check < "0") or (check > "9"))))
 				if check == '.'
 					have_dec = true
 				end
