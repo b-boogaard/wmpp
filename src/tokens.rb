@@ -18,11 +18,14 @@ class Tokens
 
 		if (p.to_i != -1 and p >= "0" and "9" >= p)
 			t.type = T_NUMBER
-
+			have_dec = false
 			has_dot = false
 			while true do 
 				check = @sequence.peek(0)
-				break if (check.to_i == -1 or (check < "0") or (check > "9"))
+				break if (check.to_i == -1 or (check < "0") or (check > "9")) and (check != '.' and not have_dec)
+				if check == have_dec
+					have_dec = true
+				end
 				t.value += @sequence.peek(0) 
 				@sequence.shift
 			end
