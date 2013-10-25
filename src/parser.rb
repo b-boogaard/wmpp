@@ -97,8 +97,7 @@ class RecursiveDescentParser < Parser
       end
 =end
       def expression(e)
-            puts peek.type
-            if peek.type == T_LPAREN
+           if peek.type == T_LPAREN
                   lhs = ASTNode.new
                   optype = T_PLUS
                   rhs = ASTNode.new

@@ -30,10 +30,8 @@ class TestParser < Test::Unit::TestCase
 		100.times do |i|
 			s = genSequence(i%5)
 			t = Tokens.new(StringSequence.new(s))
-			puts
-			puts "#{s} = #{eval(s)}"
 			e = g.parse(t)
-			assert_equal(e.eval, eval(s), "#{s} != #{e.eval}, probably a parsing error")
+			assert_equal(e.eval, eval(s), "#{e.eval} != #{s}, probably a parsing error")
 		end
 =begin
 			sequence from file
