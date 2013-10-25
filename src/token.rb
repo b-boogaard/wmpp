@@ -11,7 +11,7 @@
 
 class Token
 	attr_accessor :type
-	attr_reader :value
+	attr_accessor :value
 	attr_reader :at
 
 	def initialize(type, value, at)
