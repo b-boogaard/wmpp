@@ -38,7 +38,7 @@ class RecursiveDescentParser < Parser
       def syntax
             at_ = at
 	      peek_ = peek
-      	message = "syntax error at offset #{at_} near #{peek_}"
+      	message = "syntax error at offset #{at_} near #{peek_.value}"
 	  #throw Parser.Syntax(message, at)
       end
 
@@ -82,11 +82,10 @@ class RecursiveDescentParser < Parser
       def number(node) #ASTNode
             t = match(T_NUMBER)
             if t
-                  node = ASTNode.new(t.value)
+                  return ASTNumber.new(t.value)
             else
-                  node = ASTNode.new
+                  return false
             end
-            return node
       end
 =begin
       def symbol(x) #ASTNode
@@ -98,6 +97,7 @@ class RecursiveDescentParser < Parser
       end
 =end
       def expression(e)
+            puts peek.type
             if peek.type == T_LPAREN
                   lhs = ASTNode.new
                   optype = T_PLUS
@@ -114,23 +114,23 @@ class RecursiveDescentParser < Parser
                   else
                         syntax
                   end
-#            else return literal
+            else return number(e)
             end
       return false
       end
 
       def statement(e)
-            return (expression(e) and eol)
+            return (expression(e) and (eol or endy))
       end
 
       def statements(e)
             if endy
                   e = ASTStatements.new
-                  return true
+                 return true
             end
-            s = ASTNode.new
-            if statement(s) and statements(e)
-                  e.statements << s #probably broken
+            s
+            if (statement(s) and statements(e))
+                  e.statements << s#probably broken
                   return true
             end
             syntax
@@ -139,7 +139,7 @@ class RecursiveDescentParser < Parser
 
       def parse(tokens)
         @tokens = tokens
-	  e = ASTNode.new
+	  e = ASTStatements.new
 	  if statements(e)
 	     return e
 	  else 

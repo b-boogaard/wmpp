@@ -33,7 +33,7 @@ class TestParser < Test::Unit::TestCase
 			puts
 			puts "#{s} = #{eval(s)}"
 			e = g.parse(t)
-			#assert_equal(e.eval, eval(s), "#{s} != e.eval, probably a parsing error")
+			assert_equal(e.eval, eval(s), "#{s} != #{e.eval}, probably a parsing error")
 		end
 =begin
 			sequence from file
