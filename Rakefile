@@ -31,5 +31,7 @@ task :translate do
 	j = j[0]
 	j += ".j"
 	dir = Dir.getwd
-	system("java -jar jasmin.jar -d bin '#{dir}/j/#{j}'")
+	sys = "java -jar jasmin.jar -d bin #{dir}/j/#{j}"
+	puts sys
+	system(sys)
 end
