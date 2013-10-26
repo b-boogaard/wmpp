@@ -215,6 +215,7 @@ class RecursiveDescentParser < Parser
       def parse(tokens)
         @tokens = tokens
         e = statements_test
+        e.statements.reverse!
         return e
       end
       private :peek, :shift, :at, :match, :endy, :eol, :lparen, :rparen, :op, :number, :expression, :statement, :statements #:symbol, :literal
