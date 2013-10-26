@@ -45,8 +45,8 @@ attr_accessor :program
 	end
 
 	def translate(file, program)
-		@name = file[10..-3]
-		@out = File.open(file, 'w')
+		@name = file
+		@out = File.open("#{Dir.pwd}/j/#{file}", 'w')
 		@program = program
 		generate
 	end
