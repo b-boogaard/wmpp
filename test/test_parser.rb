@@ -68,7 +68,7 @@ class TestParser < Test::Unit::TestCase
 			s = ""
 			last = ""
 			rand(10).times do
-			 	temp = genSequence(i%5) + "\n"
+			 	temp = genSequence(i%10) + "\n"
 			 	s += temp
 			 	last = temp
 			end
