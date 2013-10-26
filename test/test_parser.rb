@@ -60,4 +60,22 @@ class TestParser < Test::Unit::TestCase
 =end
 		assert(true)
 	end
+
+	def test_make_programs
+		file = ""
+		#FileUtils.cd('wmpp')
+		100.times do |i|
+			s = ""
+			last = ""
+			rand(10).times do
+			 	temp = genSequence(i%5) + "\n"
+			 	s += temp
+			 	last = temp
+			end
+			file = "test/wmpp/test#{i.to_s}.wmpp"
+			f = File.open(file,'w')
+			f.write(s)
+			f.close
+		end
+	end
 end 
