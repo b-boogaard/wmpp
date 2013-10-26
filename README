@@ -2,7 +2,7 @@ Samuel Van Pelt & Brian van de Boogaard
 Compiler Design, Dr. Warren Macevoy, Fall 2013
 Start date: Oct. 23, 2013
 
-Compiler for WM++ like language written in Ruby that compiles to Rubinius.
+Compiler for WM++ like language written in Ruby that compiles to JVM Bytecode through Jasmin.
 Based on work by Dr. Warren Macevoy in C++.
 
 
