@@ -1,6 +1,7 @@
 require 'rake'
 
 task :default => [:buildall]
+task :clean => [:doclean]
 task :build, [:file] => [:translate]
 task :run, [:argv] => [:prog]
 task :tests => [:test]
@@ -18,6 +19,35 @@ task :buildall do
 	Dir.foreach('j/') do |item|
 		next if item == '.' or item == '..'
 		system("java -jar jasmin.jar -d bin j/#{item}")
+	end
+end
+
+## Clean ##
+
+task :doclean do
+	if not Dir["test/wmpp/*"].empty?
+		puts "cleaning test/wmpp/"
+		system("rm test/wmpp/*")
+	else
+		puts "test/wmpp/ is already clean"
+	end
+	if not Dir["j/*"].empty?
+		puts "cleaning /j"
+		system("rm j/*")
+	else
+		puts "j/ is already clean"
+	end
+	if not Dir["tmp/*"].empty?
+		puts "cleaning tmp/"
+		system("rm tmp/*")
+	else
+		puts "tmp/ is already clean"
+	end
+	if not Dir["bin/*"].empty?
+		puts "cleaning bin/"
+		system("rm bin/*")
+	else
+		puts "bin/ is already clean"
 	end
 end
 
