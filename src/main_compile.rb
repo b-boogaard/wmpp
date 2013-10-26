@@ -3,7 +3,7 @@ require_relative "stringsequence.rb"
 require_relative "jasm_translate.rb"
 
 def compile(file)
-	file = ARGV[0]
+	#file = ARGV[0]
 	sequence = File.read("#{Dir.pwd}/#{file}")
 	tokens = Tokens.new(StringSequence.new(sequence))
 	parser = RecursiveDescentParser.new
