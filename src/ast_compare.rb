@@ -37,7 +37,7 @@ def eval
       @lhs.translate(out)
       @rhs.translate(out)
       out.write("fcmpl\n") #broken
-      out.write("ifeq\n")
+      out.write("ifeq __#{@lhs.eval}<#{@rhs.eval}__:\n")
   end
 
 end
@@ -168,7 +168,7 @@ def eval
     #translate
       @lhs.translate(out)
       @rhs.translate(out)
-      out.write("fcmpl\n") #broken
+      out.write("fcmpg\n") #broken
   end
 
 end
@@ -254,7 +254,7 @@ def eval
     #translate
       @lhs.translate(out)
       @rhs.translate(out)
-      out.write("fcmpl\n") #broken
+      out.write("fcmpg\n") #broken
   end
 
 end
