@@ -19,7 +19,7 @@ class TestParser < Test::Unit::TestCase
 			next if item == '.' or item == '..' or item == '.DS_Store'
 			path = "#{Dir.pwd}/test/wmpp/#{item}"
 			syspath = "ruby" + " #{Dir.pwd}/src/main_compile.rb test/wmpp/#{item}"
-			puts syspath
+			#puts syspath
 			system(syspath)
 			j = path.split("/")
 			j = j[j.length - 1]
@@ -28,7 +28,7 @@ class TestParser < Test::Unit::TestCase
 			j += ".j"
 			dir = Dir.getwd
 			sys = "java -jar jasmin.jar -d " + "#{dir}/bin " + "#{dir}/j/#{j}"
-			puts sys
+			#puts sys
 			system(sys)
 
 			sys_jav = "java -classpath " + "#{dir}/bin #{j[0..-3]}" + " > #{dir}/tmp/results.txt"
