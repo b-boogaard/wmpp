@@ -36,6 +36,8 @@ class ASTDivide < ASTNode
 
   def translate(out)
     #translate
-    raise NotImplementedError, "No implementation of ASTDivide translate"
+      @lhs.translate(out)
+      @rhs.translate(out)
+      out.write("fdiv\n")
   end
 end

@@ -29,6 +29,6 @@ class ASTNumber < ASTNode
 
 	def translate(out)
 		#define translation to rubinius
-		raise("No implementation of ASTNumber translate")
+		out.write("ldc #{@value.to_f.to_s}\n")
 	end
 end

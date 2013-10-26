@@ -26,6 +26,15 @@ class ASTStatements < ASTNode
 
 	def translate(out)
 		#perform translate
-		raise("No implementation of ASTStatements translate")
+		@statements.each do |s|
+		    out.write("   ; push java.lang.System.out (type PrintStream)\n")
+    		out.write("   getstatic java/lang/System/out Ljava/io/PrintStream;\n")
+    		out.write("   \n")
+    		s.translate(out)
+		    out.write("   \n")
+    		out.write("   ; invoke println\n")
+    		out.write("   invokevirtual java/io/PrintStream/println(F)V\n")
+    		out.write("   \n")
+    	end
 	end
 end

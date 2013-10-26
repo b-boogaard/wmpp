@@ -39,6 +39,8 @@ class ASTProduct < ASTNode
 
   def translate(out)
   	#translate
-  	raise NotImplementedError, "No implementation of ASTProduct translate"
+      @lhs.translate(out)
+      @rhs.translate(out)
+      out.write("fmul\n")
   end
 end

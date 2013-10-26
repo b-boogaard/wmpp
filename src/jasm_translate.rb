@@ -10,7 +10,7 @@ attr_accessor :out
 attr_accessor :program
 
 	def header
-		@out.write(".class public\n")
+		@out.write(".class public #{@name}\n")
 		@out.write(".super java/lang/Object\n")
 		@out.write("\n")
 		@out.write("; default constructor\n")
@@ -22,6 +22,9 @@ attr_accessor :program
 		@out.write("\n")
 		@out.write(".method public static main([Ljava/lang/String;)V\n")
 		@out.write("begin:\n")
+		@out.write("	.limit stack 100\n")
+		@out.write("	.limit locals 100\n")
+		@out.write(".var 0 is ans F from begin to end\n")
 	end
 
 	def footer
@@ -32,7 +35,7 @@ attr_accessor :program
 	end
 
 	def body
-    	#@program.translate(@out);
+    	@program.translate(@out);
 	end
 
 	def generate
@@ -42,7 +45,7 @@ attr_accessor :program
 	end
 
 	def translate(file, program)
-		@name = file[0..-2]
+		@name = file[10..-3]
 		@out = File.open(file, 'w')
 		@program = program
 		generate

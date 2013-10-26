@@ -35,6 +35,8 @@ class ASTMinus < ASTNode
 
   def translate(out)
   	#translate
-  	raise NotImplementedError, "No implementation of ASTMinus translate"
+  	  @lhs.translate(out)
+      @rhs.translate(out)
+      out.write("fsub\n")
   end
 end

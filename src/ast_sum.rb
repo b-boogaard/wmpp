@@ -36,6 +36,8 @@ class ASTSum < ASTNode
 
   def translate(out)
   	#translate
-  	raise NotImplementedError, "No implementation of ASTSum translate"
+  	  @lhs.translate(out)
+      @rhs.translate(out)
+      out.write("fadd\n")
   end
 end

@@ -201,7 +201,7 @@ class RecursiveDescentParser < Parser
             e.statements << s
             return e
       end
-
+=begin
       def parse(tokens)
         @tokens = tokens
 	  e = ASTStatements.new
@@ -211,8 +211,8 @@ class RecursiveDescentParser < Parser
 	       syntax
 	  end
       end
-
-      def parse_test(tokens)
+=end
+      def parse(tokens)
         @tokens = tokens
         e = statements_test
         return e

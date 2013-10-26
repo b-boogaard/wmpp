@@ -48,7 +48,7 @@ class TestParser < Test::Unit::TestCase
 			end
 			t = Tokens.new(StringSequence.new(s))
 			#e = g.parse(t)
-			e = g.parse_test(t)
+			e = g.parse(t)
 			e.statements.reverse!
 
 			assert_equal(e.eval, eval(last), "#{e.eval} != #{last.to_s}, probably a parsing error")
