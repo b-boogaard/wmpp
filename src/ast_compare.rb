@@ -90,11 +90,38 @@ def eval
 
   def translate(out)
     #translate
-      @lhs.translate(out)
+       @lhs.translate(out)
       @rhs.translate(out)
-      out.write("fcmpl\n") #broken
-      out.write("#{-1.to_f}\n")
+      out.write("dup2\n")
+    #eq
+      out.write("fsub\n")    
+      out.write("ldc 0.0\n")
+      out.write("fcmpl\n") 
+      out.write("ifeq Trueq#{$modf}\n")
+      out.write("goto Endyeq#{$modf}\n")
+      out.write("Trueq#{$modf}:\n")
+      out.write("pop\n")
+      out.write("pop\n")
+      out.write("ldc 1.0\n")  
+      out.write("goto Endy#{$modf}\n")  
+      out.write("Endyeq#{$modf}:\n") 
+      #end eq
+      
       out.write("fcmpl\n")
+      out.write("i2f\n")
+      out.write("ldc -1.0\n")
+      out.write("fsub\n")
+      out.write("ldc 0.0\n")
+      out.write("fcmpl\n")
+      out.write("ifeq Tru#{$modf}\n")
+      out.write("goto Fal#{$modf}\n")
+      out.write("Tru#{$modf}:\n")
+      out.write("ldc 1.0\n")  
+      out.write("goto Endy#{$modf}\n")  
+      out.write("Fal#{$modf}:\n")
+      out.write("ldc 0.0\n")    
+      out.write("Endy#{$modf}:\n") 
+      $modf+=1
   end
 
 end
@@ -245,10 +272,39 @@ def eval
 
 
   def translate(out)
-    #translate
-      @lhs.translate(out)
+ #translate
+       @lhs.translate(out)
       @rhs.translate(out)
-      out.write("fcmpl\n") #broken
+      out.write("dup2\n")
+    #eq
+      out.write("fsub\n")    
+      out.write("ldc 0.0\n")
+      out.write("fcmpl\n") 
+      out.write("ifeq Trueq#{$modf}\n")
+      out.write("goto Endyeq#{$modf}\n")
+      out.write("Trueq#{$modf}:\n")
+      out.write("pop\n")
+      out.write("pop\n")
+      out.write("ldc 1.0\n")  
+      out.write("goto Endy#{$modf}\n")  
+      out.write("Endyeq#{$modf}:\n") 
+      #end eq
+      
+      out.write("fcmpg\n")
+      out.write("i2f\n")
+      out.write("ldc 1.0\n")
+      out.write("fsub\n")
+      out.write("ldc 0.0\n")
+      out.write("fcmpl\n")
+      out.write("ifeq Tru#{$modf}\n")
+      out.write("goto Fal#{$modf}\n")
+      out.write("Tru#{$modf}:\n")
+      out.write("ldc 1.0\n")  
+      out.write("goto Endy#{$modf}\n")  
+      out.write("Fal#{$modf}:\n")
+      out.write("ldc 0.0\n")    
+      out.write("Endy#{$modf}:\n") 
+      $modf+=1
   end
 
 end
