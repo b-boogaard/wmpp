@@ -81,7 +81,7 @@ class RecursiveDescentParser < Parser
 
       def op_test
             t = peek
-            if t.type == T_PLUS or t.type == T_TIMES or t.type == T_DIVIDE or t.type == T_MINUS
+            if t.type == T_PLUS or t.type == T_TIMES or t.type == T_DIVIDE or t.type == T_MINUS or t.type == T_EQUAL or t.type == T_LESS or t.type == T_LESSEQ or t.type == T_GREAT or t.type == T_GREATEQ
                   type = t.type
                   shift
                   return type
@@ -153,7 +153,17 @@ class RecursiveDescentParser < Parser
                   elsif optype == T_DIVIDE
                         return ASTDivide.new(lhs,rhs) 
                   elsif optype == T_MINUS
-                        return ASTMinus.new(lhs,rhs)                                         
+                        return ASTMinus.new(lhs,rhs) 
+                  elsif optype == T_EQUAL
+                        return ASTEqual.new(lhs,rhs)  
+                  elsif optype == T_LESS
+                        return ASTLess.new(lhs,rhs)  
+                  elsif optype == T_LESSEQ
+                        return ASTLessEqual.new(lhs,rhs)  
+                  elsif optype == T_GREAT
+                        return ASTGreater.new(lhs,rhs) 
+                  elsif optype == T_GREATEQ
+                        return ASTGreaterEqual.new(lhs,rhs)                                      
                   else 
                         assert(false, "OP not + or *")
                   end

@@ -10,7 +10,7 @@ class ASTLess < ASTNode
 
 def eval
     if ((@lhs.eval != nil) and (@rhs.eval != nil))
-      return @lhs.eval < @rhs.eval ? 1 : 0
+      return (@lhs.eval < @rhs.eval ? 1 : 0)
     else
       raise RuntimeError, "Trying to perfrom < with a nil object"
     end
@@ -33,11 +33,23 @@ def eval
 
 
   def translate(out)
-    #translate
       @lhs.translate(out)
       @rhs.translate(out)
-      out.write("fcmpl\n") #broken
-      out.write("\n")
+      out.write("fcmpl\n")
+      out.write("i2f\n")
+      out.write("ldc 1.0\n")
+      out.write("fsub\n")
+      out.write("ldc 0.0\n")
+      out.write("fcmpl\n")
+      out.write("ifeq Tru#{$modf}\n")
+      out.write("goto Fal#{$modf}\n")
+      out.write("Tru#{$modf}:\n")
+      out.write("ldc 1.0\n")  
+      out.write("goto Endy#{$modf}\n")  
+      out.write("Fal#{$modf}:\n")
+      out.write("ldc 0.0\n")    
+      out.write("Endy#{$modf}:\n") 
+      $modf+=1
   end
 
 end
@@ -99,7 +111,7 @@ class ASTEqual < ASTNode
 
 def eval
     if ((@lhs.eval != nil) and (@rhs.eval != nil))
-      return @lhs.eval == @rhs.eval ? 1 : 0
+      return (@lhs.eval == @rhs.eval ? 1 : 0)
     else
       raise RuntimeError, "Trying to perfrom == with a nil object"
     end
@@ -125,7 +137,19 @@ def eval
     #translate
       @lhs.translate(out)
       @rhs.translate(out)
-      out.write("fcmpl\n") #brokenz
+      out.write("fsub\n")
+      out.write("ldc 0.0\n")
+      out.write("fcmpl\n")
+     # out.write("f2i\n")
+      out.write("ifeq Tru#{$modf}\n")
+      out.write("goto Fal#{$modf}\n")
+      out.write("Tru#{$modf}:\n")
+      out.write("ldc 1.0\n")  
+      out.write("goto Endy#{$modf}\n")  
+      out.write("Fal#{$modf}:\n")
+      out.write("ldc 0.0\n")    
+      out.write("Endy#{$modf}:\n") 
+      $modf+=1
   end
 
 end
@@ -142,7 +166,7 @@ class ASTGreater < ASTNode
 
 def eval
     if ((@lhs.eval != nil) and (@rhs.eval != nil))
-      return @lhs.eval > @rhs.eval ? 1 : 0
+      return (@lhs.eval > @rhs.eval ? 1 : 0)
     else
       raise RuntimeError, "Trying to perfrom > with a nil object"
     end

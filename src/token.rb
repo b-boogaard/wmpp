@@ -7,6 +7,12 @@
 	T_DIVIDE = "\\"
 	T_MINUS = "-"
 	T_NUMBER = "\#"
+	T_EQUAL = "=="
+	T_ASSIGN = "="
+	T_LESS = "<"
+	T_GREAT = ">"
+	T_LESSEQ = "<="
+	T_GREATEQ = ">="
 	T_ERROR = "?"
 
 class Token

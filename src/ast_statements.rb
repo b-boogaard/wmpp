@@ -35,6 +35,7 @@ class ASTStatements < ASTNode
     		out.write("   ; invoke println\n")
     		out.write("   invokevirtual java/io/PrintStream/println(F)V\n")
     		out.write("   \n")
+    		$modf+=1
     	end
 	end
 end

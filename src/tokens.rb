@@ -28,6 +28,27 @@ class Tokens
 				t.value += @sequence.peek(0).to_s 
 				@sequence.shift
 			end
+		elsif p == '='
+			if @sequence.peek(0).to_s == '='
+				@sequence.shift
+				t.type = T_EQUAL
+			else
+				t.type = T_ASSIGN
+			end
+		elsif p == '<'
+			if @sequence.peek(0).to_s == '='
+				@sequence.shift
+				t.type = T_LESSEQ
+			else
+				t.type = T_LESS
+			end
+		elsif p == '>'
+			if @sequence.peek(0).to_s == '='
+				@sequence.shift
+				t.type = T_GREATEQ
+			else
+				t.type = T_GREAT
+			end
 		elsif p == ('a'...'z')
 			t.type = T_SYMBOL
 		else

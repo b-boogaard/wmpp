@@ -40,7 +40,7 @@ class TestParser < Test::Unit::TestCase
 			j.each_line do |line|
 				array << line
 			end
- 
+
 			array.reverse!
 			s = File.read(path)
 			g = RecursiveDescentParser.new
@@ -49,11 +49,10 @@ class TestParser < Test::Unit::TestCase
 			e = g.parse(t)
 			e.statements.reverse!
 
-			i = 0
-			e.statements.each do |statement|
+			e.statements.each_with_index do |statement,i|
 				javaline = array[i]
+				puts "#{statement.eval} compare #{javaline}"				
 				assert_equal(statement.eval.to_f.sigfig_to_s(4), javaline.to_f.sigfig_to_s(4), "#{statement.eval} != #{javaline}")
-				i += 1
 			end
 			
 		end 

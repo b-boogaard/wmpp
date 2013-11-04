@@ -8,6 +8,7 @@ class JasminTranslator < Translator
 attr_accessor :name
 attr_accessor :out
 attr_accessor :program
+attr_reader :modf
 
 	def header
 		@out.write(".class public #{@name}\n")

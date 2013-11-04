@@ -1,3 +1,4 @@
+$modf = 0
 class ASTNode
 
 	def print(out)
