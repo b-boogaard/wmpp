@@ -63,7 +63,7 @@ class TestParser < Test::Unit::TestCase
 	def test_make_programs
 		file = ""
 		#FileUtils.cd('wmpp')
-		100.times do |i|
+		10.times do |i|
 			s = ""
 			last = ""
 			rand(10).times do
