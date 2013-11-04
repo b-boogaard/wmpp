@@ -249,7 +249,7 @@ class ASTGreaterEqual < ASTNode
 
 def eval
     if ((@lhs.eval != nil) and (@rhs.eval != nil))
-      return @lhs.eval > @rhs.eval ? 1 : 0
+      return @lhs.eval >= @rhs.eval ? 1 : 0
     else
       raise RuntimeError, "Trying to perfrom > with a nil object"
     end
@@ -347,7 +347,7 @@ def eval
     #translate
       @lhs.translate(out)
       @rhs.translate(out)
-      out.write("fcmpg\n") #broken
+      out.write("")
   end
 
 end
