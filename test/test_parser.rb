@@ -17,7 +17,7 @@ def genSequence(i)
 			return rand(10).to_s
 		end
 	else
-		r = rand(6)
+		r = rand(7)
 		if r == 0
 			return "(#{genSequence(i-1)}+#{genSequence(i-1)})"
 		elsif r == 1
@@ -28,6 +28,8 @@ def genSequence(i)
 	        return "(#{genSequence(i-1)}==#{genSequence(i-1)})"
 	    elsif r == 4
 	        return "(#{genSequence(i-1)}<#{genSequence(i-1)})"
+	    elsif r == 5
+	        return "(#{genSequence(i-1)}>#{genSequence(i-1)})" 
 	    else
 		    return "(#{genSequence(i-1)}/1)" #DON'T DIVIDE BY ZERO
 		end

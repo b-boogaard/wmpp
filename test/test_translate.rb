@@ -51,7 +51,7 @@ class TestParser < Test::Unit::TestCase
 
 			e.statements.each_with_index do |statement,i|
 				javaline = array[i]
-				puts "#{statement.eval} compare #{javaline}"				
+				#puts "#{statement.eval} compare #{javaline}"				
 				assert_equal(statement.eval.to_f.sigfig_to_s(4), javaline.to_f.sigfig_to_s(4), "#{statement.eval} != #{javaline}")
 			end
 			
