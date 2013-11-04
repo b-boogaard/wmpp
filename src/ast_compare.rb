@@ -347,7 +347,19 @@ def eval
     #translate
       @lhs.translate(out)
       @rhs.translate(out)
-      out.write("")
+      out.write("fsub\n")
+      out.write("ldc 0.0\n")
+      out.write("fcmpl\n")
+     # out.write("f2i\n")
+      out.write("ifeq Fal#{$modf}\n")
+      out.write("goto Tru#{$modf}\n")
+      out.write("Tru#{$modf}:\n")
+      out.write("ldc 1.0\n")  
+      out.write("goto Endy#{$modf}\n")  
+      out.write("Fal#{$modf}:\n")
+      out.write("ldc 0.0\n")    
+      out.write("Endy#{$modf}:\n") 
+      $modf+=1
   end
 
 end

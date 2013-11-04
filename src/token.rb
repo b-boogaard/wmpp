@@ -13,6 +13,7 @@
 	T_GREAT = ">"
 	T_LESSEQ = "<="
 	T_GREATEQ = ">="
+	T_NOTEQ = "!="
 	T_ERROR = "?"
 
 class Token

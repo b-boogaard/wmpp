@@ -49,6 +49,13 @@ class Tokens
 			else
 				t.type = T_GREAT
 			end
+		elsif p == '!'
+			if @sequence.peek(0).to_s == '='
+				@sequence.shift
+				t.type = T_NOTEQ
+			else
+				t.type = T_ERROR
+			end
 		elsif p == ('a'...'z')
 			t.type = T_SYMBOL
 		else
