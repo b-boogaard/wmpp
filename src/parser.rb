@@ -69,18 +69,7 @@ class RecursiveDescentParser < Parser
             match(T_RPAREN)
       end
 
-      def op(type) 
-            t = peek #Token
-            if t.type == T_PLUS or t.type == T_TIMES
-                  type = t.type
-                  shift
-                  return true
-            else
-                  return false
-            end
-      end
-
-      def op_test
+      def op
             t = peek
             if t.type == T_PLUS or t.type == T_TIMES or t.type == T_DIVIDE or t.type == T_MINUS or t.type == T_EQUAL or t.type == T_LESS or t.type == T_LESSEQ or t.type == T_GREAT or t.type == T_GREATEQ or t.type == T_NOTEQ or t.type == T_ASSIGN
                   type = t.type
@@ -92,16 +81,7 @@ class RecursiveDescentParser < Parser
             end
       end
 
-      def number(node) #ASTNode
-            t = match(T_NUMBER)
-            if t
-                  node = ASTNumber.new(t.value)
-            else
-                  return false
-            end
-      end
-
-      def number_test
+      def number
             t = match(T_NUMBER)
             if t
                   return ASTNumber.new(t.value)
@@ -109,43 +89,13 @@ class RecursiveDescentParser < Parser
                   return false
             end
       end
-=begin
-      def symbol(x) #ASTNode
-            t = match(T_SYMBOL)
-      end
 
-      def literal
-
-      end
-=end
-      def expression(e)
-           if peek.type == T_LPAREN
-                  lhs = ASTNode.new
-                  optype = T_PLUS
-                  rhs = ASTNode.new
-                  if lparen and expression(lhs) and op(optype) and expression(rhs) and rparen
-                        if optype == T_PLUS
-                              e = ASTSum.new(lhs,rhs)
-                        elsif optyp == T_TIMES
-                              e = ASTProduct.new(lhs,rhs)
-                        else 
-                              assert(false, "OP not + or *")
-                        end
-                        return true
-                  else
-                        syntax
-                  end
-            else return number(e)
-            end
-      return false
-      end
-
-      def expression_test
+      def expression
            if peek.type == T_LPAREN
                   shift
-                  lhs = expression_test
-                  optype = op_test
-                  rhs = expression_test
+                  lhs = expression
+                  optype = op
+                  rhs = expression
                   shift
                   if optype == T_PLUS
                         return ASTSum.new(lhs,rhs)
@@ -176,18 +126,14 @@ class RecursiveDescentParser < Parser
             elsif peek.type == T_SYMBOL
                   shift
                   return ASTSymbol.new(peek.value)
-            else return number_test
+            else return number
             end
       return false
       end
 
 
-      def statement(e)
-            return (expression(e) and (eol or endy))
-      end
-
-      def statement_test
-            e = expression_test
+      def statement
+            e = expression
             if (eol or endy)
                   return e
             else
@@ -195,44 +141,20 @@ class RecursiveDescentParser < Parser
             end
       end
 
-      def statements(e)
-            if endy
-                  e = ASTStatements.new
-                 return true
-            end
-            s = nil
-            if (statement(s) and statements(e))
-                  e.statements << s#probably broken
-                  return true
-            end
-            syntax
-            return false
-      end
-
-      def statements_test
+      def statements
             if endy
                   return ASTStatements.new
             end
-            s = statement_test
+            s = statement
             if not s; syntax end
-            e = statements_test
+            e = statements
             e.statements << s
             return e
       end
-=begin
+
       def parse(tokens)
         @tokens = tokens
-	  e = ASTStatements.new
-	  if statements(e)
-	     return e
-	  else 
-	       syntax
-	  end
-      end
-=end
-      def parse(tokens)
-        @tokens = tokens
-        e = statements_test
+        e = statements
         e.statements.reverse!
         return e
       end
