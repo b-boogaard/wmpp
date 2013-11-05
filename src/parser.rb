@@ -96,14 +96,20 @@ class RecursiveDescentParser < Parser
 
       def expression
            if peek.type == T_SYMBOL
-                  lhs = ASTSymbol.new(peek.value)
-                  shift
-                  if peek.type == T_ASSIGN
+                  if peek(1).type == T_END
+                        value = peek.value
                         shift
-                        rhs = expression
-                        return @symbols.insert(lhs, rhs)
+                        return @symbols.lookup(value)
                   else
-                        syntax
+                        lhs = ASTSymbol.new(peek.value)
+                        shift
+                        if peek.type == T_ASSIGN
+                              shift
+                              rhs = expression
+                              return @symbols.insert(lhs, rhs)
+                        else
+                              syntax
+                        end
                   end
            elsif peek.type == T_LPAREN
                   shift
