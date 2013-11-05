@@ -114,7 +114,12 @@ class RecursiveDescentParser < Parser
                         lhs = expression
                   end
                   optype = op
+                  if peek.type == T_SYMBOL
+                        rhs = @symbols.lookup(peek.value)
+                        shift
+                  else
                   rhs = expression
+                  end
                   shift
                   if optype == T_PLUS
                         return ASTSum.new(lhs,rhs)
