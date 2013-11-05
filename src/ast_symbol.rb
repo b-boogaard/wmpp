@@ -18,6 +18,6 @@ class ASTSymbol < ASTNode
 
 	def translate(out)
 		#define translation to rubinius
-		raise("No implementation of ASTSymbol translate")
+		out.write("field public #{@symbol.to_s} F\n")
 	end
 end

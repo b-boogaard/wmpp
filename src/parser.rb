@@ -10,7 +10,7 @@ class Parser
         def initialize(error, at)
           @error = error
 	    @at = at
-          @symbols = ASTSymbol.new
+          @symbols = Hash.new(nil)
 	   end    
 	    
 	   def print(out)
