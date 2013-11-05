@@ -3,13 +3,12 @@ require_relative "ast_node"
 class ASTSymbol < ASTNode
 
 	def initialize(symbol)
-		#@symbols = Hash.new(nil)
 		@symbol = symbol
 	end
 
 	def eval
 		# Not complete
-		return @symbol.eval
+		return @symbol
 	end
 
 	def print(out)

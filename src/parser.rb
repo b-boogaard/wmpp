@@ -10,7 +10,6 @@ class Parser
         def initialize(error, at)
           @error = error
 	    @at = at
-          @symbols = Hash.new(nil)
 	   end    
 	    
 	   def print(out)
@@ -24,6 +23,11 @@ end
 
 class RecursiveDescentParser < Parser
       @tokens #tokens
+
+      def initialize
+            @symbols = ASTSymbols.new
+      end
+
       def peek(delta = 0)
       	  return @tokens.peek(delta)
       end
@@ -91,9 +95,24 @@ class RecursiveDescentParser < Parser
       end
 
       def expression
-           if peek.type == T_LPAREN
+           if peek.type == T_SYMBOL
+                  lhs = ASTSymbol.new(peek.value)
                   shift
-                  lhs = expression
+                  if peek.type == T_ASSIGN
+                        shift
+                        rhs = expression
+                        return @symbols.insert(lhs, rhs)
+                  else
+                        syntax
+                  end
+           elsif peek.type == T_LPAREN
+                  shift
+                  if peek.type == T_SYMBOL
+                        lhs = @symbols.lookup(peek.value)
+                        shift
+                  else
+                        lhs = expression
+                  end
                   optype = op
                   rhs = expression
                   shift
@@ -116,16 +135,11 @@ class RecursiveDescentParser < Parser
                   elsif optype == T_GREATEQ
                         return ASTGreaterEqual.new(lhs,rhs) 
                   elsif optype == T_NOTEQ
-                        return ASTNotEqual.new(lhs,rhs)
-                  elsif optype == T_ASSIGN
-                        return ASTAssign.new(lhs,rhs)                                   
+                        return ASTNotEqual.new(lhs,rhs)                             
                   else 
                         assert(false, "OP not + or *")
                   end
                   return true
-            elsif peek.type == T_SYMBOL
-                  shift
-                  return ASTSymbol.new(peek.value)
             else return number
             end
       return false
