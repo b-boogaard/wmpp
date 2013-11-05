@@ -10,6 +10,7 @@ class Parser
         def initialize(error, at)
           @error = error
 	    @at = at
+          @symbols = ASTSymbol.new
 	   end    
 	    
 	   def print(out)
@@ -81,7 +82,7 @@ class RecursiveDescentParser < Parser
 
       def op_test
             t = peek
-            if t.type == T_PLUS or t.type == T_TIMES or t.type == T_DIVIDE or t.type == T_MINUS or t.type == T_EQUAL or t.type == T_LESS or t.type == T_LESSEQ or t.type == T_GREAT or t.type == T_GREATEQ or t.type == T_NOTEQ
+            if t.type == T_PLUS or t.type == T_TIMES or t.type == T_DIVIDE or t.type == T_MINUS or t.type == T_EQUAL or t.type == T_LESS or t.type == T_LESSEQ or t.type == T_GREAT or t.type == T_GREATEQ or t.type == T_NOTEQ or t.type == T_ASSIGN
                   type = t.type
                   shift
                   return type
@@ -165,11 +166,16 @@ class RecursiveDescentParser < Parser
                   elsif optype == T_GREATEQ
                         return ASTGreaterEqual.new(lhs,rhs) 
                   elsif optype == T_NOTEQ
-                        return ASTNotEqual.new(lhs,rhs)                                    
+                        return ASTNotEqual.new(lhs,rhs)
+                  elsif optype == T_ASSIGN
+                        return ASTAssign.new(lhs,rhs)                                   
                   else 
                         assert(false, "OP not + or *")
                   end
                   return true
+            elsif peek.type == T_SYMBOL
+                  shift
+                  return ASTSymbol.new(peek.value)
             else return number_test
             end
       return false
@@ -230,5 +236,5 @@ class RecursiveDescentParser < Parser
         e.statements.reverse!
         return e
       end
-      private :peek, :shift, :at, :match, :endy, :eol, :lparen, :rparen, :op, :number, :expression, :statement, :statements #:symbol, :literal
+      private :peek, :shift, :at, :match, :endy, :eol, :lparen, :rparen, :op, :number, :expression, :statement, :statements#, :symbol#, :literal
 end

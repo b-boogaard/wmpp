@@ -10,6 +10,7 @@ class Tokens
 
 	def next
 		p = @sequence.peek(0);
+		#puts "#{p} and peek(1) #{@sequence.peek(1)}"
 		value = "";
 		value += p.to_s;
 		t = Token.new(p, value, @sequence.at)
@@ -56,7 +57,7 @@ class Tokens
 			else
 				t.type = T_ERROR
 			end
-		elsif p == ('a'...'z')
+		elsif p =~ /[a-z]/
 			t.type = T_SYMBOL
 		else
 			case p
@@ -86,7 +87,7 @@ class Tokens
 				t.type = T_ERROR
 			end
 		end
-		@ahead.push(t) 
+		@ahead.push(t)
 	end
 
 	def peek(delta) 

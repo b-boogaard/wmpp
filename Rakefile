@@ -32,7 +32,7 @@ task :doclean do
 		puts "test/wmpp/ is already clean"
 	end
 	if not Dir["j/*"].empty?
-		puts "cleaning /j"
+		puts "cleaning j/"
 		system("rm j/*")
 	else
 		puts "j/ is already clean"

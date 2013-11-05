@@ -15,6 +15,7 @@
 	T_GREATEQ = ">="
 	T_NOTEQ = "!="
 	T_ERROR = "?"
+	T_SYMBOL = "a"
 
 class Token
 	attr_accessor :type

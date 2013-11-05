@@ -1,10 +1,11 @@
-require_relative "ast_node"
+require_relative 'ast_node.rb'
 
-class ASTSymbol < ASTNode
+class ASTAssign < ASTNode
 
-	def initialize(symbol)
+	def initialize(symbol, value)
 		#@symbols = Hash.new(nil)
 		@symbol = symbol
+		@value = value
 	end
 
 =begin
@@ -15,7 +16,7 @@ class ASTSymbol < ASTNode
 
 	def eval
 		# Not complete
-		return @symbol.eval
+		return @value.eval
 	end
 
 	def print(out)
@@ -24,7 +25,7 @@ class ASTSymbol < ASTNode
 			out.puts("symbol:#{key}, value:#{value}")
 		end
 =end
-		out.puts("#{@symbol.eval}")
+		out.puts("#{@value.eval}")
 	end
 
 	def translate(out)
