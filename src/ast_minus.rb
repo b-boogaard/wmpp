@@ -5,6 +5,7 @@ class ASTMinus < ASTNode
     if ((lhs.is_a? ASTNode) and (rhs.is_a? ASTNode)) 
       @lhs = lhs
       @rhs = rhs
+      @index = 0
     else
       raise SyntaxError, "Type mismatch excpected ASTNode in ASTMinus initialization"
     end
@@ -38,5 +39,7 @@ class ASTMinus < ASTNode
   	  @lhs.translate(out)
       @rhs.translate(out)
       out.write("fsub\n")
+      out.write("fstore #{@index}\n")
+      out.write("fload #{@index}\n")
   end
 end

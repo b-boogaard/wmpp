@@ -3,6 +3,7 @@ class ASTLess < ASTNode
     if ((lhs.is_a? ASTNode) and (rhs.is_a? ASTNode)) 
       @lhs = lhs
       @rhs = rhs
+      @index = 0
     else
       raise SyntaxError, "Type mismatch excpected ASTNode in ASTLess initialization"
     end
@@ -50,6 +51,8 @@ def eval
       out.write("ldc 0.0\n")    
       out.write("Endy#{$modf}:\n") 
       $modf+=1
+      out.write("fstore #{@index}\n")
+      out.write("fload #{@index}\n")
   end
 
 end
@@ -59,6 +62,7 @@ class ASTLessEqual < ASTNode
     if ((lhs.is_a? ASTNode) and (rhs.is_a? ASTNode)) 
       @lhs = lhs
       @rhs = rhs
+      @index = 0
     else
       raise SyntaxError, "Type mismatch excpected ASTNode in ASTLessEqual initialization"
     end
@@ -122,6 +126,8 @@ def eval
       out.write("ldc 0.0\n")    
       out.write("Endy#{$modf}:\n") 
       $modf+=1
+      out.write("fstore #{@index}\n")
+      out.write("fload #{@index}\n")
   end
 
 end
@@ -131,6 +137,7 @@ class ASTEqual < ASTNode
     if ((lhs.is_a? ASTNode) and (rhs.is_a? ASTNode)) 
       @lhs = lhs
       @rhs = rhs
+      @index = 0
     else
       raise SyntaxError, "Type mismatch excpected ASTNode in ASTEqual initialization"
     end
@@ -177,6 +184,8 @@ def eval
       out.write("ldc 0.0\n")    
       out.write("Endy#{$modf}:\n") 
       $modf+=1
+      out.write("fstore #{@index}\n")
+      out.write("fload #{@index}\n")
   end
 
 end
@@ -186,6 +195,7 @@ class ASTGreater < ASTNode
     if ((lhs.is_a? ASTNode) and (rhs.is_a? ASTNode)) 
       @lhs = lhs
       @rhs = rhs
+      @index = 0
     else
       raise SyntaxError, "Type mismatch excpected ASTNode in ASTGreater initialization"
     end
@@ -233,6 +243,8 @@ def eval
       out.write("ldc 0.0\n")    
       out.write("Endy#{$modf}:\n") 
       $modf+=1
+      out.write("fstore #{@index}\n")
+      out.write("fload #{@index}\n")
   end
 
 end
@@ -242,6 +254,7 @@ class ASTGreaterEqual < ASTNode
     if ((lhs.is_a? ASTNode) and (rhs.is_a? ASTNode)) 
       @lhs = lhs
       @rhs = rhs
+      @index = 0
     else
       raise SyntaxError, "Type mismatch excpected ASTNode in ASTGreaterEqual initialization"
     end
@@ -305,6 +318,8 @@ def eval
       out.write("ldc 0.0\n")    
       out.write("Endy#{$modf}:\n") 
       $modf+=1
+      out.write("fstore #{@index}\n")
+      out.write("fload #{@index}\n")
   end
 
 end
@@ -314,6 +329,7 @@ class ASTNotEqual < ASTNode
     if ((lhs.is_a? ASTNode) and (rhs.is_a? ASTNode)) 
       @lhs = lhs
       @rhs = rhs
+      @index = 0
     else
       raise SyntaxError, "Type mismatch excpected ASTNode in ASTNotEqual initialization"
     end
@@ -360,6 +376,8 @@ def eval
       out.write("ldc 0.0\n")    
       out.write("Endy#{$modf}:\n") 
       $modf+=1
+      out.write("fstore #{@index}\n")
+      out.write("fload #{@index}\n")
   end
 
 end

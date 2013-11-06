@@ -8,6 +8,7 @@ class ASTProduct < ASTNode
     if ((lhs.is_a? ASTNode) and (rhs.is_a? ASTNode)) 
           @lhs = lhs
           @rhs = rhs
+          @index = 0
         else
           raise SyntaxError, "Type mismatch excpected ASTNode in ASTProduct initialization"
         end
@@ -42,5 +43,7 @@ class ASTProduct < ASTNode
       @lhs.translate(out)
       @rhs.translate(out)
       out.write("fmul\n")
+      out.write("fstore #{@index}\n")
+      out.write("fload #{@index}\n")
   end
 end
