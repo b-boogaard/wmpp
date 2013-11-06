@@ -6,6 +6,11 @@ class Tokens
 	def initialize(sequence)
 		@sequence = sequence;
 		@ahead = Array.new
+		@keywords = Hash.new(false)
+		@keywords["if"] << true
+		@keywords["while"] << true
+		@keywords["end"] << true
+		@keywords["do"] << true
 	end
 
 	def next
@@ -58,7 +63,19 @@ class Tokens
 				t.type = T_ERROR
 			end
 		elsif p =~ /[a-z]/
-			t.type = T_SYMBOL
+			if @sequence.peek(1) =~ /[a-z]/
+				while true do
+					shift
+					p += @sequence.peek(0)
+					break if not(@sequence.peek(1) =~ /[a-z]/)
+				end
+				if @keywords[p]
+					t.type = T_KEYWORD
+					t.value = p
+				end
+			else
+				t.type = T_SYMBOL
+			end
 		else
 			case p
 			when "("
