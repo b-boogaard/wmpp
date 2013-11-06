@@ -181,6 +181,16 @@ class RecursiveDescentParser < Parser
 
       def statement
             e = expression
+            if exps.has_key? e.string
+                  #puts "common sub found #{exps[rhs.string].string}: #{exps[rhs.string].eval}"
+                  e = exps[e.string]
+            elsif not(e.is_a? ASTNumber)#not (rhs.string > "0" and rhs.string < "9")
+                              #puts "#{rhs.string}"
+                  e.set_index($temp)
+                  exps[e.string] = ASTVar.new(e,$temp)
+                  $temp += 1
+                            #  rhs = exps[rhs.string]
+            end
             #puts e.string
             if (eol or endy)
                   return e
