@@ -123,7 +123,7 @@ class RecursiveDescentParser < Parser
                         if exps.has_key? lhs.string
                               #puts "common sub found #{exps[lhs.string].string}: #{exps[lhs.string].eval}"
                               lhs = exps[lhs.string]
-                        elsif not (lhs.string < "9" and lhs.string > "0")
+                        elsif not (lhs.is_a? ASTNumber)#not (lhs.string < "9" and lhs.string > "0")
                               #puts "#{lhs.string}"
                               lhs.set_index($temp)
                               exps[lhs.string] = ASTVar.new(lhs,$temp)
@@ -137,9 +137,10 @@ class RecursiveDescentParser < Parser
                   else
                         rhs = expression
                         if exps.has_key? rhs.string
-                             #  puts "common sub found #{exps[rhs.string].string}: #{exps[rhs.string].eval}"
+                              #puts "common sub found #{exps[rhs.string].string}: #{exps[rhs.string].eval}"
                               rhs = exps[rhs.string]
-                        elsif not (rhs.string > "0" and rhs.string < "9")
+                        elsif not(lhs.is_a? ASTNumber)#not (rhs.string > "0" and rhs.string < "9")
+                              #puts "#{rhs.string}"
                               rhs.set_index($temp)
                               exps[rhs.string] = ASTVar.new(rhs,$temp)
                               $temp += 1
