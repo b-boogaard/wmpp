@@ -4,7 +4,7 @@ require_relative "ast.rb"
 class ASTVar < ASTNode
 	@index
 	def initialize(expression, index = 0)
-		@value = expression.eval
+		@parent = expression
 		@index = index
 	end
 
@@ -13,11 +13,15 @@ class ASTVar < ASTNode
 	end
 
 	def string
+		"#{@parent.string}"
+	end
+
+	def string2
 		"temp#{@index}"
 	end
 
 	def eval
-		return @value
+		return @parent.eval
 	end
 
 	def translate(out)

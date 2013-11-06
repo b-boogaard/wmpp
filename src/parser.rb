@@ -128,6 +128,7 @@ class RecursiveDescentParser < Parser
                               lhs.set_index($temp)
                               exps[lhs.string] = ASTVar.new(lhs,$temp)
                               $temp += 1
+                             # lhs = exps[lhs.string]
                         end
                   end
                   optype = op
@@ -144,6 +145,7 @@ class RecursiveDescentParser < Parser
                               rhs.set_index($temp)
                               exps[rhs.string] = ASTVar.new(rhs,$temp)
                               $temp += 1
+                            #  rhs = exps[rhs.string]
                         end
                   end
                   shift
