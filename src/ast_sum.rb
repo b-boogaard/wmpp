@@ -5,6 +5,7 @@ class ASTSum < ASTNode
   	if ((lhs.is_a? ASTNode) and (rhs.is_a? ASTNode)) 
       @lhs = lhs
       @rhs = rhs
+      @index = 0
     else
       raise SyntaxError, "Type mismatch excpected ASTNode in ASTSum initialization"
     end
@@ -30,7 +31,23 @@ class ASTSum < ASTNode
     else
       rhs = "nil"
     end
-    out.write "(#{lhs} * #{rhs})\n"
+    out.write "(#{lhs} + #{rhs})\n"
+    #out.write "\n"
+  end
+
+  def string
+    if (@lhs.eval != nil)
+      lhs = @lhs.string
+    else
+      lhs = "nil" 
+    end
+
+    if (@rhs.eval != nil)
+      rhs = @rhs.string
+    else
+      rhs = "nil"
+    end
+    return "(#{lhs} + #{rhs})\n"
     #out.write "\n"
   end
 
@@ -39,5 +56,7 @@ class ASTSum < ASTNode
   	  @lhs.translate(out)
       @rhs.translate(out)
       out.write("fadd\n")
+      out.write("fstore #{@index}\n")
+      out.write("fload #{@index}\n")
   end
 end

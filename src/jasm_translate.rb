@@ -8,7 +8,7 @@ class JasminTranslator < Translator
 attr_accessor :name
 attr_accessor :out
 attr_accessor :program
-attr_reader :modf
+#attr_reader :modf
 
 	def header
 		@out.write(".class public #{@name}\n")
@@ -26,6 +26,9 @@ attr_reader :modf
 		@out.write("	.limit stack 100\n")
 		@out.write("	.limit locals 100\n")
 		@out.write(".var 0 is ans F from begin to end\n")
+		#50.times do |i|
+		#	@out.write(".var #{i+1} is temp#{i+1} F from begin to end\n")
+		#end
 	end
 
 	def footer

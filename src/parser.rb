@@ -23,9 +23,11 @@ end
 
 class RecursiveDescentParser < Parser
       @tokens #tokens
+      attr_reader :exps
 
       def initialize
             @symbols = ASTSymbols.new
+            @exps = Hash.new
       end
 
       def peek(delta = 0)
@@ -118,13 +120,30 @@ class RecursiveDescentParser < Parser
                         shift
                   else
                         lhs = expression
+                        if exps.has_key? lhs.string
+                              #puts "common sub found #{exps[lhs.string].string}: #{exps[lhs.string].eval}"
+                              lhs = exps[lhs.string]
+                        elsif not (lhs.string < "9" and lhs.string > "0")
+                              #puts "#{lhs.string}"
+                              lhs.set_index($temp)
+                              exps[lhs.string] = ASTVar.new(lhs,$temp)
+                              $temp += 1
+                        end
                   end
                   optype = op
                   if peek.type == T_SYMBOL
                         rhs = @symbols.lookup(peek.value)
                         shift
                   else
-                  rhs = expression
+                        rhs = expression
+                        if exps.has_key? rhs.string
+                             #  puts "common sub found #{exps[rhs.string].string}: #{exps[rhs.string].eval}"
+                              rhs = exps[rhs.string]
+                        elsif not (rhs.string > "0" and rhs.string < "9")
+                              rhs.set_index($temp)
+                              exps[rhs.string] = ASTVar.new(rhs,$temp)
+                              $temp += 1
+                        end
                   end
                   shift
                   if optype == T_PLUS
@@ -159,6 +178,7 @@ class RecursiveDescentParser < Parser
 
       def statement
             e = expression
+            #puts e.string
             if (eol or endy)
                   return e
             else
