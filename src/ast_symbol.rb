@@ -15,6 +15,15 @@ class ASTSymbol < ASTNode
 		out.puts("#{@symbol.eval}")
 	end
 
+	def string
+    if (@symbol.eval != nil)
+      symbol = @symbol.string
+    else
+      lhs = "nil" 
+    end
+    return "(#{@symbol.eval})\n"
+  end
+
 	def translate(out)
 		#define translation to rubinius
 		out.write("field public #{@symbol.to_s} F\n")
