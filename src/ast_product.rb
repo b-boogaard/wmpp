@@ -38,6 +38,21 @@ class ASTProduct < ASTNode
     #out.write "\n"
   end
 
+  def string
+    if (@lhs.eval != nil)
+      lhs = @lhs.string
+    else
+      lhs = "nil" 
+    end
+
+    if (@rhs.eval != nil)
+      rhs = @rhs.string
+    else
+      rhs = "nil"
+    end
+    return "(#{lhs} * #{rhs})\n"
+  end
+
   def translate(out)
   	#translate
       @lhs.translate(out)

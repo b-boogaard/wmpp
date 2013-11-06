@@ -32,6 +32,21 @@ def eval
     out.write "(#{lhs} < #{rhs})\n"
   end
 
+  def string
+    if (@lhs.eval != nil)
+      lhs = @lhs.string
+    else
+      lhs = "nil" 
+    end
+
+    if (@rhs.eval != nil)
+      rhs = @rhs.string
+    else
+      rhs = "nil"
+    end
+    return "(#{lhs} < #{rhs})\n"
+  end
+
 
   def translate(out)
       @lhs.translate(out)
@@ -89,6 +104,22 @@ def eval
       rhs = "nil"
     end
     out.write "(#{lhs} <= #{rhs})\n"
+  end
+
+  def string
+    if (@lhs.eval != nil)
+      lhs = @lhs.string
+    else
+      lhs = "nil" 
+    end
+
+    if (@rhs.eval != nil)
+      rhs = @rhs.string
+    else
+      rhs = "nil"
+    end
+    return "(#{lhs} <= #{rhs})\n"
+    #out.write "\n"
   end
 
 
@@ -166,6 +197,21 @@ def eval
     out.write "(#{lhs} == #{rhs})\n"
   end
 
+  def string
+    if (@lhs.eval != nil)
+      lhs = @lhs.string
+    else
+      lhs = "nil" 
+    end
+
+    if (@rhs.eval != nil)
+      rhs = @rhs.string
+    else
+      rhs = "nil"
+    end
+    return "(#{lhs} == #{rhs})\n"
+  end
+
 
   def translate(out)
     #translate
@@ -224,6 +270,21 @@ def eval
     out.write "(#{lhs} > #{rhs})\n"
   end
 
+  def string
+    if (@lhs.eval != nil)
+      lhs = @lhs.string
+    else
+      lhs = "nil" 
+    end
+
+    if (@rhs.eval != nil)
+      rhs = @rhs.string
+    else
+      rhs = "nil"
+    end
+    return "(#{lhs} > #{rhs})\n"
+  end
+
 
   def translate(out)
       @lhs.translate(out)
@@ -280,7 +341,22 @@ def eval
     else
       rhs = "nil"
     end
-    out.write "(#{lhs} > #{rhs})\n"
+    out.write "(#{lhs} >= #{rhs})\n"
+  end
+
+  def string
+    if (@lhs.eval != nil)
+      lhs = @lhs.string
+    else
+      lhs = "nil" 
+    end
+
+    if (@rhs.eval != nil)
+      rhs = @rhs.string
+    else
+      rhs = "nil"
+    end
+    return "(#{lhs} >= #{rhs})\n"
   end
 
 
@@ -355,7 +431,22 @@ def eval
     else
       rhs = "nil"
     end
-    out.write "(#{lhs} <> #{rhs})\n"
+    out.write "(#{lhs} != #{rhs})\n"
+  end
+
+  def string
+    if (@lhs.eval != nil)
+      lhs = @lhs.string
+    else
+      lhs = "nil" 
+    end
+
+    if (@rhs.eval != nil)
+      rhs = @rhs.string
+    else
+      rhs = "nil"
+    end
+    return "(#{lhs} != #{rhs})\n"
   end
 
 

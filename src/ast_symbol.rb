@@ -8,7 +8,6 @@ class ASTSymbol < ASTNode
 
 	def eval
 		# Not complete
-		puts "symbol eval called"
 		return @symbol
 	end
 

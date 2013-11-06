@@ -48,7 +48,6 @@ class ASTSum < ASTNode
       rhs = "nil"
     end
     return "(#{lhs} + #{rhs})\n"
-    #out.write "\n"
   end
 
   def translate(out)
