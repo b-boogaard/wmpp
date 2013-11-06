@@ -46,7 +46,7 @@ class RecursiveDescentParser < Parser
             at_ = at
 	      peek_ = peek
       	message = "syntax error at offset #{at_} near #{peek_.value}"
-	  #throw Parser.Syntax(message, at)
+	  throw Parser.Syntax(message, at)
       end
 
       def match(type)
@@ -120,15 +120,15 @@ class RecursiveDescentParser < Parser
                         shift
                   else
                         lhs = expression
-                        if exps.has_key? lhs.string
-                              #puts "common sub found #{exps[lhs.string].string}: #{exps[lhs.string].eval}"
-                              lhs = exps[lhs.string]
+                        if @exps.has_key? lhs.string
+                              #puts "common sub found #{@exps[lhs.string].string}: #{@exps[lhs.string].eval}"
+                              lhs = @exps[lhs.string]
                         elsif not (lhs.is_a? ASTNumber)#not (lhs.string < "9" and lhs.string > "0")
                               #puts "#{lhs.string}"
                               lhs.set_index($temp)
-                              exps[lhs.string] = ASTVar.new(lhs,$temp)
+                              @exps[lhs.string] = ASTVar.new(lhs,$temp)
                               $temp += 1
-                             # lhs = exps[lhs.string]
+                             # lhs = @exps[lhs.string]
                         end
                   end
                   optype = op
@@ -137,15 +137,15 @@ class RecursiveDescentParser < Parser
                         shift
                   else
                         rhs = expression
-                        if exps.has_key? rhs.string
-                              #puts "common sub found #{exps[rhs.string].string}: #{exps[rhs.string].eval}"
-                              rhs = exps[rhs.string]
+                        if @exps.has_key? rhs.string
+                              #puts "common sub found #{@exps[rhs.string].string}: #{@exps[rhs.string].eval}"
+                              rhs = @exps[rhs.string]
                         elsif not(lhs.is_a? ASTNumber)#not (rhs.string > "0" and rhs.string < "9")
                               #puts "#{rhs.string}"
                               rhs.set_index($temp)
-                              exps[rhs.string] = ASTVar.new(rhs,$temp)
+                              @exps[rhs.string] = ASTVar.new(rhs,$temp)
                               $temp += 1
-                            #  rhs = exps[rhs.string]
+                            #  rhs = @exps[rhs.string]
                         end
                   end
                   shift
@@ -181,15 +181,15 @@ class RecursiveDescentParser < Parser
 
       def statement
             e = expression
-            if exps.has_key? e.string
-                  #puts "common sub found #{exps[rhs.string].string}: #{exps[rhs.string].eval}"
-                  e = exps[e.string]
+            if @exps.has_key? e.string
+                  #puts "common sub found #{@exps[rhs.string].string}: #{@exps[rhs.string].eval}"
+                  e = @exps[e.string]
             elsif not(e.is_a? ASTNumber)#not (rhs.string > "0" and rhs.string < "9")
                               #puts "#{rhs.string}"
                   e.set_index($temp)
-                  exps[e.string] = ASTVar.new(e,$temp)
+                  @exps[e.string] = ASTVar.new(e,$temp)
                   $temp += 1
-                            #  rhs = exps[rhs.string]
+                            #  rhs = @exps[rhs.string]
             end
             #puts e.string
             if (eol or endy)

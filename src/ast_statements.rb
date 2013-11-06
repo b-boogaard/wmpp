@@ -24,6 +24,15 @@ class ASTStatements < ASTNode
 		end
 	end
 
+	def string
+		ret = ""
+		@statements.each do |statement|
+			ret += statement.string
+			ret += "\n"
+		end
+		return ret
+	end
+
 	def translate(out)
 		#perform translate
 		@statements.each do |s|
