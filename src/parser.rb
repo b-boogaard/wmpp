@@ -140,7 +140,7 @@ class RecursiveDescentParser < Parser
                         if @exps.has_key? rhs.string
                               #puts "common sub found #{@exps[rhs.string].string}: #{@exps[rhs.string].eval}"
                               rhs = @exps[rhs.string]
-                        elsif not(lhs.is_a? ASTNumber)#not (rhs.string > "0" and rhs.string < "9")
+                        elsif not(rhs.is_a? ASTNumber)#not (rhs.string > "0" and rhs.string < "9")
                               #puts "#{rhs.string}"
                               rhs.set_index($temp)
                               @exps[rhs.string] = ASTVar.new(rhs,$temp)
