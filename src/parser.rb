@@ -15,6 +15,10 @@ class Parser
 	   def print(out)
 	     out.puts("error at #{@at}: #{@error}")
 	   end
+
+         def string
+            "error at #{@at}: #{@error}"
+         end
       end
 
 public
@@ -51,7 +55,7 @@ class RecursiveDescentParser < Parser
             at_ = at
 	      peek_ = peek
       	message = "syntax error at offset #{at_} near #{peek_.value}"
-	  #throw Parser.Syntax(message, at)
+	     abort(Parser::Syntax.new(message, at_).string)
       end
 
       def match(type)
@@ -217,6 +221,7 @@ class RecursiveDescentParser < Parser
 
       def statement
             e = expression
+            if e
             if @exps.has_key? e.string+@controlstack[-1].to_s
                   #puts "common sub found #{@exps[rhs.string].string}: #{@exps[rhs.string].eval}"
                   e = @exps[e.string+@controlstack[-1].to_s]
@@ -226,6 +231,9 @@ class RecursiveDescentParser < Parser
                   @exps[e.string+@controlstack[-1].to_s] = ASTVar.new(e,$temp)
                   $temp += 1
                             #  rhs = @exps[rhs.string]
+            end
+            else
+                  syntax
             end
             #puts e.string
             if (eol or endy)
