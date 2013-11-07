@@ -3,9 +3,10 @@ require_relative 'ast_node.rb'
 class ASTAssign < ASTNode
 
 	def initialize(symbol, value)
-		#@symbols = Hash.new(nil)
-		@symbol = symbol
-		@value = value
+		if symbol.is_a? ASTSymbol
+			@symbol = symbol
+			@value = value
+		end
 	end
 
 	def eval

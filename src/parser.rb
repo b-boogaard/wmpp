@@ -29,6 +29,7 @@ class RecursiveDescentParser < Parser
 
       def initialize
             @symbols = ASTSymbols.new
+            @var_index = 500
             @exps = Hash.new
             @controlstack = Array.new
             @controlcount = -1
@@ -102,20 +103,19 @@ class RecursiveDescentParser < Parser
 
       def expression
            if peek.type == T_SYMBOL
-                  if peek(1).type == T_END
-                        value = peek.value
-                        shift
-                        return @symbols.lookup(value)
+                  if not @symbols.lookup(peek.value).nil?
+                        lhs = @symbols.lookup(peek.value)
                   else
-                        lhs = ASTSymbol.new(peek.value)
+                        lhs = ASTSymbol.new(@var_index, peek.value)
+                        @symbols.insert(peek.value, lhs)
+                        @var_index += 1
                         shift
-                        if peek.type == T_ASSIGN
-                              shift
-                              rhs = expression
-                              return @symbols.insert(lhs, rhs)
-                        else
-                              syntax
-                        end
+                  end
+                  if peek.type == T_ASSIGN
+                        symbol = lhs
+                        shift
+                        rhs = expression
+                        return ASTAssign.new(symbol, rhs)
                   end
             elsif peek.type == T_KEYWORD
                   if peek.value == "if"

@@ -6,7 +6,7 @@ class ASTSymbols < ASTNode
 	end
 
 	def insert(key, value)
-		@symbols[key.eval] = value
+		@symbols[key] = value
 	end
 
 	def eval

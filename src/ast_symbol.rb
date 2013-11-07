@@ -2,30 +2,30 @@ require_relative "ast_node"
 
 class ASTSymbol < ASTNode
 
-	def initialize(symbol)
-		@symbol = symbol
+	attr_reader :register
+	
+	def initialize(register, name)
+		@register = register
+		@name = name
 	end
 
 	def eval
-		# Not complete
-		return @symbol
+		return @name
 	end
 
 	def print(out)
-		out.puts("#{@symbol.eval}")
+		out.puts("#{@name}")
 	end
 
 	def string
-    if (@symbol.eval != nil)
-      symbol = @symbol.string
+    if (@name != nil)
+      return "#{@name}"
     else
-      lhs = "nil" 
+      return nil
     end
-    return "(#{@symbol.eval})\n"
   end
 
 	def translate(out)
-		#define translation to rubinius
-		out.write("field public #{@symbol.to_s} F\n")
+		#define translation
 	end
 end
