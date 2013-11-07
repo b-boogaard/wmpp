@@ -12,6 +12,9 @@ class ASTSum < ASTNode
   end
 
   def eval
+      if (@lhs.is_a? ASTSymbol) or (@rhs.is_a? ASTSymbol)
+        return 0
+      end
   	 if ((@lhs.eval != nil) and (@rhs.eval != nil))
       return @lhs.eval + @rhs.eval
     else
