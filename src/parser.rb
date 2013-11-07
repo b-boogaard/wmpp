@@ -150,22 +150,22 @@ class RecursiveDescentParser < Parser
                   end
             elsif peek.type == T_LPAREN
                   shift
-                  if peek.type == T_SYMBOL
-                        lhs = @symbols.lookup(peek.value)
-                        shift
-                  else
-                        lhs = expression
-                        if @exps.has_key? (lhs.string+@controlstack[-1].to_s)
+                #  if peek.type == T_SYMBOL
+                 #       lhs = @symbols.lookup(peek.value)
+                 #       shift
+                 # else
+                  lhs = expression
+                  if @exps.has_key? (lhs.string+@controlstack[-1].to_s)
                               #puts "common sub found #{@exps[lhs.string].string}: #{@exps[lhs.string].eval}"
-                              lhs = @exps[lhs.string+@controlstack[-1].to_s]
-                        elsif not (lhs.is_a? ASTNumber or lhs.is_a? ASTIf or lhs.is_a? ASTEndIf or lhs.is_a? ASTSymbol)#not (lhs.string < "9" and lhs.string > "0")
+                        lhs = @exps[lhs.string+@controlstack[-1].to_s]
+                  elsif not (lhs.is_a? ASTNumber or lhs.is_a? ASTIf or lhs.is_a? ASTEndIf or lhs.is_a? ASTSymbol)#not (lhs.string < "9" and lhs.string > "0")
                               #puts "#{lhs.string}"
-                              lhs.set_index($temp)
-                              @exps[lhs.string+@controlstack[-1].to_s] = ASTVar.new(lhs,$temp)
-                              $temp += 1
+                        lhs.set_index($temp)
+                        @exps[lhs.string+@controlstack[-1].to_s] = ASTVar.new(lhs,$temp)
+                        $temp += 1
                              # lhs = @exps[lhs.string]
-                        end
                   end
+                  
                   optype = op
                   if peek.type == T_SYMBOL
                         rhs = @symbols.lookup(peek.value)
