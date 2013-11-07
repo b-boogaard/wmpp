@@ -12,6 +12,9 @@ class ASTDivide < ASTNode
   end
 
   def eval
+    if(@lhs.is_a? ASTSymbol)
+      return 1
+    end
     if ((@lhs.eval != nil) and (@rhs.eval != nil))
     raise SyntaxError, "Tried to divide by 0" if @rhs.eval == 0
       return @lhs.eval / @rhs.eval

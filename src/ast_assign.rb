@@ -18,8 +18,13 @@ class ASTAssign < ASTNode
 		out.puts("#{@value.eval}")
 	end
 
+	def string
+		return "#{@symbol.eval}=#{@value.string}"
+	end
+
 	def translate(out)
-		#define translation to rubinius
-		raise("No implementation of ASTSymbol translate")
+		@value.translate(out)
+		out.write(" fstore #{@symbol.register}\n")
+		out.write(" fload #{@symbol.register}\n")
 	end
 end

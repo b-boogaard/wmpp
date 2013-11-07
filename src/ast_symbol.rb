@@ -3,6 +3,7 @@ require_relative "ast_node"
 class ASTSymbol < ASTNode
 
 	attr_reader :register
+	attr_reader :name
 	
 	def initialize(register, name)
 		@register = register
@@ -27,5 +28,6 @@ class ASTSymbol < ASTNode
 
 	def translate(out)
 		#define translation
+		out.write("	fload #{@register}\n")
 	end
 end

@@ -105,6 +105,7 @@ class RecursiveDescentParser < Parser
            if peek.type == T_SYMBOL
                   if not @symbols.lookup(peek.value).nil?
                         lhs = @symbols.lookup(peek.value)
+                        shift
                   else
                         lhs = ASTSymbol.new(@var_index, peek.value)
                         @symbols.insert(peek.value, lhs)
@@ -116,6 +117,8 @@ class RecursiveDescentParser < Parser
                         shift
                         rhs = expression
                         return ASTAssign.new(symbol, rhs)
+                  else
+                        return lhs
                   end
             elsif peek.type == T_KEYWORD
                   if peek.value == "if"
@@ -217,7 +220,7 @@ class RecursiveDescentParser < Parser
             if @exps.has_key? e.string+@controlstack[-1].to_s
                   #puts "common sub found #{@exps[rhs.string].string}: #{@exps[rhs.string].eval}"
                   e = @exps[e.string+@controlstack[-1].to_s]
-            elsif not(e.is_a? ASTNumber or e.is_a? ASTIf or e.is_a? ASTEndIf)#not (rhs.string > "0" and rhs.string < "9")
+            elsif not(e.is_a? ASTNumber or e.is_a? ASTIf or e.is_a? ASTEndIf or e.is_a? ASTSymbol)#not (rhs.string > "0" and rhs.string < "9")
                               #puts "#{rhs.string}"
                   e.set_index($temp)
                   @exps[e.string+@controlstack[-1].to_s] = ASTVar.new(e,$temp)
