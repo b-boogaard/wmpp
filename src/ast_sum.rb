@@ -54,8 +54,8 @@ class ASTSum < ASTNode
   	#translate
   	  @lhs.translate(out)
       @rhs.translate(out)
-      out.write("fadd\n")
-      out.write("fstore #{@index}\n")
-      out.write("fload #{@index}\n")
+      out.write("   fadd\n")
+      out.write("   fstore #{@index}\n")
+      out.write("   fload #{@index}\n")
   end
 end

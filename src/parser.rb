@@ -23,11 +23,15 @@ end
 
 class RecursiveDescentParser < Parser
       @tokens #tokens
+      @controlstack
+      @controlcount
       attr_reader :exps
 
       def initialize
             @symbols = ASTSymbols.new
             @exps = Hash.new
+            @controlstack = Array.new
+            @controlcount = -1
       end
 
       def peek(delta = 0)
@@ -46,7 +50,7 @@ class RecursiveDescentParser < Parser
             at_ = at
 	      peek_ = peek
       	message = "syntax error at offset #{at_} near #{peek_.value}"
-	  throw Parser.Syntax(message, at)
+	  #throw Parser.Syntax(message, at)
       end
 
       def match(type)
@@ -113,7 +117,35 @@ class RecursiveDescentParser < Parser
                               syntax
                         end
                   end
-           elsif peek.type == T_LPAREN
+            elsif peek.type == T_KEYWORD
+                  if peek.value == "if"
+                        @controlcount+=1
+                        @controlstack.push(@controlcount)
+                        shift
+                        cond = expression
+                        if @exps.has_key? cond.string
+                               cond = @exps[cond.string]
+                        elsif not(cond.is_a? ASTNumber)#not (rhs.string > "0" and rhs.string < "9")
+                              cond.set_index($temp)
+                              @exps[cond.string] = ASTVar.new(cond,$temp)
+                              $temp += 1
+                            #  rhs = @exps[rhs.string]
+                        end
+                        return ASTIf.new(cond,@controlcount)
+                  elsif peek.value == "while"
+                        shift
+                        cond = expression
+                        @controlcount+=1
+                        @controlstack.push(@controlcount)
+                        return ASTWhile.new(cond,@controlcount)
+                  elsif peek.value == "endif"
+                        shift
+                        return ASTEndIf.new(@controlstack.pop)
+                  elsif peek.value == "endwhile"
+                        shift
+                        return ASTEndWhile.new(@controlstack.pop)
+                  end
+            elsif peek.type == T_LPAREN
                   shift
                   if peek.type == T_SYMBOL
                         lhs = @symbols.lookup(peek.value)
@@ -175,6 +207,7 @@ class RecursiveDescentParser < Parser
                   return true
             else return number
             end
+      puts "FALSE"
       return false
       end
 
@@ -184,7 +217,7 @@ class RecursiveDescentParser < Parser
             if @exps.has_key? e.string
                   #puts "common sub found #{@exps[rhs.string].string}: #{@exps[rhs.string].eval}"
                   e = @exps[e.string]
-            elsif not(e.is_a? ASTNumber)#not (rhs.string > "0" and rhs.string < "9")
+            elsif not(e.is_a? ASTNumber or e.is_a? ASTIf or e.is_a? ASTEndIf)#not (rhs.string > "0" and rhs.string < "9")
                               #puts "#{rhs.string}"
                   e.set_index($temp)
                   @exps[e.string] = ASTVar.new(e,$temp)

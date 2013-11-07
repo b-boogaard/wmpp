@@ -25,7 +25,8 @@ attr_accessor :program
 		@out.write("begin:\n")
 		@out.write("	.limit stack 1000\n")
 		@out.write("	.limit locals 1000\n")
-		@out.write(".var 0 is ans F from begin to end\n")
+		@out.write("	.var 0 is ans F from begin to end\n")
+
 		#50.times do |i|
 		#	@out.write(".var #{i+1} is temp#{i+1} F from begin to end\n")
 		#end

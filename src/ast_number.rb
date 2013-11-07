@@ -33,6 +33,6 @@ class ASTNumber < ASTNode
 
 	def translate(out)
 		#define translation to rubinius
-		out.write("ldc #{@value.to_f.to_s}\n")
+		out.write("	ldc #{@value.to_f.to_s}\n")
 	end
 end
