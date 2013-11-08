@@ -27,7 +27,7 @@ class TestParser < Test::Unit::TestCase
 			j = j[0]
 			j += ".j"
 			dir = Dir.getwd
-			sys = "java -jar jasmin.jar -d " + "#{dir}/bin " + "#{dir}/j/#{j}"
+			sys = "java -jar jasmin.jar -d " + "#{dir}/bin " + "#{dir}/j/#{j} > /dev/null"
 			#puts sys
 			system(sys)
 
