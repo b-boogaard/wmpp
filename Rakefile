@@ -12,12 +12,12 @@ task :calc => [:run_calc]
 ## Build All ##
 task :buildall do
 	Dir.foreach('wmpp/') do |item|
-  		next if item == '.' or item == '..'
+  		next if item == '.' or item == '..' or item == '.gitignore'
   		ruby "src/main_compile.rb wmpp/#{item}"
 	end
 
 	Dir.foreach('j/') do |item|
-		next if item == '.' or item == '..'
+		next if item == '.' or item == '..' or item == '.gitignore'
 		system("java -jar jasmin.jar -d bin j/#{item}")
 	end
 end
