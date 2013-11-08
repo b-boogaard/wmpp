@@ -1,6 +1,6 @@
 *~
 .DS_Store
 trash/
-*.wmpp
+test*.wmpp
 *.j
 *.class
