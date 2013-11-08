@@ -5,6 +5,53 @@ Start date: Oct. 23, 2013
 Compiler for WM++ like language written in Ruby that compiles to JVM Bytecode through Jasmin.
 Based on work by Dr. Warren Macevoy in C++.
 
+Rake Tasks
+task :default - Builds everything in wmpp/ putting .j in j/ and .class in bin/
+task :clean - Cleans project
+task :build, [:file] - Compiles specific file. Must be given complete file path from Rake default directory
+task :run, [:argv] - Runs a .class file in the bin directory i.e. rake run[test] will run test.class
+task :tests - Complete test suite
+task :brian_test - Tests written by Brian
+task :sam_test - Tests written by Sam
+task :calc - Starts the repl
 
-TO-DO
--Determine how we want to abstarct and handle "out" (streams)
+WMPP Syntax
+All expressions must be fully parenthesized
+example:
+	(1+1)
+	(2*10)
+	(3+(2+4))
+	(1<10)
+	
+WMPP can handle both integers and floating points. 
+Floating points do not need to start with 0 i.e. .2 and 0.2 are both valid
+
+Assignments do not need to be parenthesized. They can be on either side of an expression
+example:
+	x=(1+1)
+	y=(x+x)
+	
+Control Structures
+example:
+	if(x<3)
+	expressions
+	endif
+	
+	while(x=(x+2)<10)
+	x=(x+1)
+	endwhile
+	
+Valid Operators
+Arithmetic
++
+-
+*
+/
+Comparison
+>
+<
+>=
+<=
+==
+Assignment
+=
