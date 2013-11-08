@@ -8,7 +8,7 @@ class ASTSymbols < ASTNode
 	def insert(key, value)
 		@symbols[key] = value
 	end
-
+	
 	def eval
 		@symbols.each do |key, value|
 			value.eval

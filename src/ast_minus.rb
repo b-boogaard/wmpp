@@ -35,13 +35,13 @@ class ASTMinus < ASTNode
   end
 
   def string
-    if (@lhs.eval != nil)
+    if (@lhs.string != nil)
       lhs = @lhs.string
     else
       lhs = "nil" 
     end
 
-    if (@rhs.eval != nil)
+    if (@rhs.string != nil)
       rhs = @rhs.string
     else
       rhs = "nil"

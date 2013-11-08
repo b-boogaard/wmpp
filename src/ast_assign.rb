@@ -19,7 +19,7 @@ class ASTAssign < ASTNode
 	end
 
 	def string
-		return "#{@symbol.eval}=#{@value.string}"
+		return "#{@symbol.name}=#{@value.string}"
 	end
 
 	def translate(out)
