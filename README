@@ -15,6 +15,11 @@ task :brian_test - Tests written by Brian
 task :sam_test - Tests written by Sam
 task :calc - Starts the repl
 
+example:
+	rake (builds everything in wmpp/)
+	rake build[wmpp/ex1.wmpp] (builds wmpp/ex1.wmpp)
+	rake run[ex1] (runs ex1.class)
+
 WMPP Syntax
 All expressions must be fully parenthesized
 example:
