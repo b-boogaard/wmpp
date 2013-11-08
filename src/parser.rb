@@ -130,6 +130,9 @@ class RecursiveDescentParser < Parser
                         @controlstack.push(@controlcount)
                         shift
                         cond = expression
+                        if !cond
+                              syntax
+                        end
                         if @exps.has_key? cond.string
                                cond = @exps[cond.string]
                         elsif not(cond.is_a? ASTNumber)#not (rhs.string > "0" and rhs.string < "9")
@@ -142,6 +145,9 @@ class RecursiveDescentParser < Parser
                   elsif peek.value == "while"
                         shift
                         cond = expression
+                        if !cond
+                              syntax
+                        end
                         @controlcount+=1
                         @controlstack.push(@controlcount)
                         return ASTWhile.new(cond,@controlcount)
