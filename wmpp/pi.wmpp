@@ -1,4 +1,4 @@
-loops=300001;
+loops=3000001;
 denom=3;
 pi=4.0;
 addflop=1;
