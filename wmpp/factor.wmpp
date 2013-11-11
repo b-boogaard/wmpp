@@ -6,7 +6,6 @@ a=number;
 b=i;
 k=0;
 while((a-(k*b))>=b);
-(a-(k*b));
 k=(k+1);
 endwhile;
 bool=(a-(k*b));
