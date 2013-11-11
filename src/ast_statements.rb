@@ -37,24 +37,37 @@ class ASTStatements < ASTNode
 		#perform translate
 		
 		@statements.each do |s|
-		out.write("   ; push java.lang.System.out (type PrintStream)\n")
- 		out.write("   getstatic java/lang/System/out Ljava/io/PrintStream;\n")
-  		out.write("   \n")
+    		if s.supress==false
+    			out.write("   ; push java.lang.System.out (type PrintStream)\n")
+ 				out.write("   getstatic java/lang/System/out Ljava/io/PrintStream;\n")
+  				out.write("   \n")
+  			else
+  				out.write("\n")
+  			end
+
     		s.translate(out)
 		  
     		$modf+=1
-    		if not (s.is_a? ASTEndIf or s.is_a? ASTEndWhile)
-	    		out.write("   \n")
-    			out.write("   ; invoke println\n")
-    			out.write("   invokevirtual java/io/PrintStream/println(F)V\n")
-    			out.write("   \n")
+    		if(s.supress==true)
+    			if not (s.is_a? ASTEndIf or s.is_a? ASTEndWhile)
+    				out.write("pop\n")
+    			else
+    				out.write("\n")
+    			end
     		else
-    			out.write("	ldc -1.56")
-    			out.write("   \n")
-    			out.write("   ; invoke println\n")
-    			out.write("   invokevirtual java/io/PrintStream/println(F)V\n")
-    			out.write("   \n")
-    		end
+    			if not (s.is_a? ASTEndIf or s.is_a? ASTEndWhile)
+	    			out.write("   \n")
+    				out.write("   ; invoke println\n")
+    				out.write("   invokevirtual java/io/PrintStream/println(F)V\n")
+    				out.write("   \n")
+    			else
+    				out.write("	ldc -1.56")
+    				out.write("   \n")
+    				out.write("   ; invoke println\n")
+    				out.write("   invokevirtual java/io/PrintStream/println(F)V\n")
+    				out.write("   \n")
+    			end
+    		end	
 
     	end
     	

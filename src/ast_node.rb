@@ -1,6 +1,9 @@
 $modf = 0
 $temp = 1
 class ASTNode
+	attr_accessor :supress
+	@supress = false
+
 	def set_index(i)
 		@index = i
 	end

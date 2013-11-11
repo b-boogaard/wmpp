@@ -60,3 +60,20 @@ Comparison
 ==
 Assignment
 =
+
+By default all ASTStatements output upon running. By placeing a ';' at the end of a line you can supress output. If you supress the opening of a control structure you must also supress its closing.
+
+while(1==1);
+endwhile;
+
+is valid but
+
+while(1==1);
+endwhile
+
+or 
+
+while(1==1)
+endwhile;
+
+are not.

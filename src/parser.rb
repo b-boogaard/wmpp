@@ -68,6 +68,10 @@ class RecursiveDescentParser < Parser
             end
       end
 
+      def supress
+            match(T_SUPRESS)
+      end
+
       def endy
             match(T_END)
       end
@@ -242,6 +246,11 @@ class RecursiveDescentParser < Parser
                   syntax
             end
             #puts e.string
+            if supress
+                  e.supress = true
+            else
+                  e.supress = false
+            end
             if (eol or endy)
                   return e
             else

@@ -17,6 +17,7 @@
 	T_ERROR = "?"
 	T_SYMBOL = "symbol"
 	T_KEYWORD = "keyword"
+	T_SUPRESS = ";"
 
 class Token
 	attr_accessor :type

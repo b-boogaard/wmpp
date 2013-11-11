@@ -35,6 +35,8 @@ class Tokens
 				t.value += @sequence.peek(0).to_s 
 				@sequence.shift
 			end
+		elsif p == ';'
+			t.type=T_SUPRESS
 		elsif p == '='
 			if @sequence.peek(0).to_s == '='
 				@sequence.shift
