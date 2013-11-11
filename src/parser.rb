@@ -130,21 +130,13 @@ class RecursiveDescentParser < Parser
                   end
             elsif peek.type == T_KEYWORD
                   if peek.value == "if"
-                        @controlcount+=1
-                        @controlstack.push(@controlcount)
                         shift
                         cond = expression
                         if !cond
                               syntax
                         end
-                        if @exps.has_key? cond.string
-                               cond = @exps[cond.string]
-                        elsif not(cond.is_a? ASTNumber)#not (rhs.string > "0" and rhs.string < "9")
-                              cond.set_index($temp)
-                              @exps[cond.string] = ASTVar.new(cond,$temp)
-                              $temp += 1
-                            #  rhs = @exps[rhs.string]
-                        end
+                        @controlcount+=1
+                        @controlstack.push(@controlcount)
                         return ASTIf.new(cond,@controlcount)
                   elsif peek.value == "while"
                         shift
@@ -172,7 +164,7 @@ class RecursiveDescentParser < Parser
                   if @exps.has_key? (lhs.string+@controlstack[-1].to_s)
                               #puts "common sub found #{@exps[lhs.string].string}: #{@exps[lhs.string].eval}"
                         lhs = @exps[lhs.string+@controlstack[-1].to_s]
-                  elsif not (lhs.is_a? ASTNumber or lhs.is_a? ASTIf or lhs.is_a? ASTEndWhile or lhs.is_a? ASTWhile or lhs.is_a? ASTEndIf or lhs.is_a? ASTSymbol)#not (lhs.string < "9" and lhs.string > "0")
+                  elsif not (lhs.is_a? ASTNumber or lhs.is_a? ASTIf or lhs.is_a? ASTEndWhile or lhs.is_a? ASTWhile or lhs.is_a? ASTEndIf or lhs.is_a? ASTSymbol or lhs.is_a? ASTAssign)#not (lhs.string < "9" and lhs.string > "0")
                               #puts "#{lhs.string}"
                         lhs.set_index($temp)
                         @exps[lhs.string+@controlstack[-1].to_s] = ASTVar.new(lhs,$temp)
@@ -189,7 +181,7 @@ class RecursiveDescentParser < Parser
                         if @exps.has_key? rhs.string+@controlstack[-1].to_s
                               #puts "common sub found #{@exps[rhs.string].string}: #{@exps[rhs.string].eval}"
                               rhs = @exps[rhs.string+@controlstack[-1].to_s]
-                        elsif not(rhs.is_a? ASTNumber  or rhs.is_a? ASTIf or rhs.is_a? ASTEndWhile or rhs.is_a? ASTWhile or rhs.is_a? ASTEndIf or rhs.is_a? ASTSymbol)#not (rhs.string > "0" and rhs.string < "9")
+                        elsif not(rhs.is_a? ASTNumber  or rhs.is_a? ASTIf or rhs.is_a? ASTEndWhile or rhs.is_a? ASTWhile or rhs.is_a? ASTEndIf or rhs.is_a? ASTSymbol or rhs.is_a? ASTAssign)#not (rhs.string > "0" and rhs.string < "9")
                               #puts "#{rhs.string}"
                               rhs.set_index($temp)
                               @exps[rhs.string+@controlstack[-1].to_s] = ASTVar.new(rhs,$temp)
@@ -235,7 +227,7 @@ class RecursiveDescentParser < Parser
             if @exps.has_key? e.string+@controlstack[-1].to_s
                   #puts "common sub found #{@exps[rhs.string].string}: #{@exps[rhs.string].eval}"
                   e = @exps[e.string+@controlstack[-1].to_s]
-            elsif not(e.is_a? ASTNumber or e.is_a? ASTIf or e.is_a? ASTEndWhile or e.is_a? ASTWhile or e.is_a? ASTEndIf or e.is_a? ASTSymbol or e.is_a? ASTAssign)#not (rhs.string > "0" and rhs.string < "9")
+            elsif not(e.is_a? ASTNumber or e.is_a? ASTIf or e.is_a? ASTEndWhile or e.is_a? ASTWhile or e.is_a? ASTEndIf or e.is_a? ASTSymbol or e.is_a? ASTAssign or e.is_a? ASTAssign)#not (rhs.string > "0" and rhs.string < "9")
                               #puts "#{rhs.string}"
                   e.set_index($temp)
                   @exps[e.string+@controlstack[-1].to_s] = ASTVar.new(e,$temp)

@@ -58,7 +58,9 @@ class ASTDivide < ASTNode
       @lhs.translate(out)
       @rhs.translate(out)
       out.write("fdiv\n")
-      out.write("fstore #{@index}\n")
-      out.write("fload #{@index}\n")
+      if (@index != 0)
+        out.write("   fstore #{@index}\n")
+        out.write("   fload #{@index}\n")
+      end
   end
 end
