@@ -73,6 +73,8 @@ class Tokens
 				if @keywords[p]
 					t.type = T_KEYWORD
 					t.value = p
+				else
+					t.type = T_SYMBOL
 				end
 			else
 				t.type = T_SYMBOL
