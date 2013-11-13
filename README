@@ -2,6 +2,9 @@ Samuel Van Pelt & Brian van de Boogaard
 Compiler Design, Dr. Warren Macevoy, Fall 2013
 Start date: Oct. 23, 2013
 
+This work is distributed under the Gnu General Public License version 3. From the preamble included in the "License" file: "The GNU General Public License is a free, copyleft license for
+software and other kinds of works."
+
 Compiler for WM++ like language written in Ruby that compiles to JVM Bytecode through Jasmin.
 Based on work by Dr. Warren Macevoy in C++.
 
