@@ -20,3 +20,6 @@ end
 ARGV.each do |a|
 	compile(a)
 end 
+
+
+#JasminTranslator.new.translate("file",RecursiveDescentParser.new.parse(Tokens.new(StringSequence.new(File.read("#{Dir.pwd}/#{file}")))))

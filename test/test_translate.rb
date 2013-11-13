@@ -16,7 +16,7 @@ end
 class TestParser < Test::Unit::TestCase
 	def test_translate_all
 		Dir.foreach("#{Dir.pwd}/test/wmpp") do |item|
-			next if item == '.' or item == '..' or item == '.DS_Store'
+			next if item == '.' or item == '..' or item == '.DS_Store' or item == '.gitignore'
 			path = "#{Dir.pwd}/test/wmpp/#{item}"
 			syspath = "ruby" + " #{Dir.pwd}/src/main_compile.rb test/wmpp/#{item}"
 			#puts syspath
