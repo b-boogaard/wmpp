@@ -1,4 +1,5 @@
 require 'rake'
+require 'rake/testtask'
 
 task :default => [:buildall]
 task :clean => [:doclean]
